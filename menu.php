@@ -35,7 +35,7 @@
         </div>
 
         <div class="gallery">
-            <a target="_blank" href="tumpeng.jpeg">
+            <a href="dp_tumpeng.php">
                 <img src="tumpeng.jpeg" alt="">
             </a>
             <div class="desc">Tumpeng<br>Rp.300.000</div>
@@ -125,6 +125,15 @@
             <div class="desc">Paket Rice Bowl Chicken Lada Hitam<br>Rp.17.000</div>
         </div>
     </section>
+
+    <div class="pagination">
+        <a href="#" class="disabled" title="Previous">&#9664;</a>
+        <div class="dots">
+            <div class="dot active"></div>
+            <div class="dot"></div>
+        </div>
+        <a href="menu_2.php" title="Next">&#9654;</a>
+    </div>
 
 <footer class="footer"> 
     <div class="footer-content">

@@ -11,27 +11,14 @@
 }
 
 body {
-    display: flex;
-    justify-content: center;
-    flex-wrap: wrap;
-    margin: 0;
     font-family: 'Poppins', Arial, sans-serif;
     background-color: var(--primary);
 }
 
 .container {
-    padding-top: 80px;
-    display: grid;
-    grid-template-columns: repeat(3, 1fr);
-}
-
-div.gallery {
-    margin: 25px;
-    border: 1px solid #ccc;
-    width: 350px;
-    background-color: var(--bg);
-    color: var(--primary);
-    padding: 10px;
+    max-width: 1000px;
+    margin: 0 auto;
+    padding: 0 20px;
 }
 
 .navbar {
@@ -46,7 +33,7 @@ div.gallery {
     top: 0;
     z-index: 1030;
 }
-
+ 
 .navbar .logo {
     font-weight: bold;
     font-size: 16px;
@@ -82,7 +69,7 @@ div.gallery {
     margin: 0 16px;
 }
 
-.navbar ul li a:hover {
+.navigasi ul li a:hover {
     color: var(--primary);
 }
 
@@ -99,77 +86,75 @@ div.gallery {
     transform: scaleX(1);
 }
 
-div.gallery:hover {
-    border: 1px solid #4b5644;
+.navbar-extra a {
+    color: white;
+    margin: 0 0.5rem;
 }
 
-div.gallery img {
-    width: 100%;
-    height: 230px;
-    object-fit: cover;  
+.navbar-extra a:hover {
+    color: var(--primary);
+}
+
+h1{
+    margin-bottom: 20px;
+}
+
+.content {
+    padding: 80px 0;
+}
+
+.product-detail {
+    display: flex;
+    gap: 30px;
+    margin-bottom: 10px;
+}
+
+.product-image img {
+    width: 250px;
     border-radius: 5px;
+    height: 215px;
 }
-div.desc {
-    padding: 15px;
-    text-align: center;
+
+.product-info h1 {
+    font-size: 20px;
+    border-bottom: 1px solid var(--bg);
+    padding-bottom: 10px;
+    margin-bottom: 15px;
+}
+
+.product-info p {
+    font-size: 20px;
+    margin-bottom: 20px;
+}
+
+.form-group label {
+    display: block;
+    font-size: 18px;
+    margin-bottom: 5px;
+    margin-top: 5px;
+}
+
+select {
+    width: 300px;
+    padding: 10px;
+    border: 1px solid #000;
+    appearance: none;
+    background: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"><path d="M7 10l5 5 5-5z"/></svg>') no-repeat right 10px center;
+}
+
+.button {
     background-color: var(--bg);
-    font-size: x-large;
+    color: var(--primary);
+    border: none;
+    padding: 12px 20px;
+    margin-top: 20px;
+    cursor: pointer;
+    border-radius: 2px;
 }
 
-.gallery {
-    padding: 30px;
-    text-align: center;
-    transition: 0.3s;
+.description {
+    font-weight: 400;
 }
-
-
-.gallery:hover{
-    transform: translateY(-5px);
-    box-shadow: 0 8px 20px rgba(0,0,0,0.15);
-}
-
-.pagination {
-            width: 100%;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            gap: 20px;
-            padding: 20px 0 30px;
-        }
-        .pagination a {
-            display: inline-flex;
-            align-items: center;
-            justify-content: center;
-            width: 40px;
-            height: 40px;
-            background-color: var(--bg);
-            color: var(--primary);
-            border-radius: 50%;
-            font-size: 20px;
-            transition: 0.2s;
-        }
-        .pagination a:hover {
-            background-color: #4b5644;
-        }
-        .pagination a.disabled {
-            background-color: #ccc;
-            pointer-events: none;
-            cursor: default;
-        }
-        .pagination .dots {
-            display: flex;
-            gap: 6px;
-            align-items: center;
-        }
-        .pagination .dot {
-            width: 10px;
-            height: 10px;
-            border-radius: 50%;
-            background-color: #ccc;
-        }
-        .pagination .dot.active {
-            background-color: var(--bg);
-        }
 
 .footer{
     background: var(--primary);

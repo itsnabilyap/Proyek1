@@ -1,0 +1,181 @@
+:root {
+            --primary: #f9fce9;
+            --bg: #728663;
+        }
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            text-decoration: none;
+        }
+        body {
+            display: flex;
+            justify-content: center;
+            flex-wrap: wrap;
+            margin: 0;
+            font-family: 'Poppins', Arial, sans-serif;
+            background-color: var(--primary);
+        }
+        .container {
+            padding-top: 80px;
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+        }
+        div.gallery {
+            margin: 25px;
+            border: 1px solid #ccc;
+            width: 350px;
+            background-color: var(--bg);
+            color: var(--primary);
+            padding: 10px;
+        }
+        .navbar {
+            width: 100%;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 4px 3%;
+            background-color: var(--bg);
+            color: var(--primary);
+            position: fixed;
+            top: 0;
+            z-index: 1030;
+        }
+        .navbar .logo {
+            font-weight: bold;
+            font-size: 16px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+        .logo img {
+            width: 40px;
+            border-radius: 50%;
+        }
+        .navbar ul {
+            list-style: none;
+            display: flex;
+            gap: 25px;
+            margin: 0;
+            padding: 0;
+        }
+        .navigasi {
+            list-style: none;
+            display: flex;
+            gap: 20px;
+        }
+        .navigasi a {
+            color: var(--primary);
+            display: inline-block;
+            font-size: 16px;
+            margin: 0 16px;
+        }
+        .navbar ul li a:hover {
+            color: var(--primary);
+        }
+        .navigasi a::after {
+            content: '';
+            display: block;
+            padding-bottom: 0.1rem;
+            border-bottom: 0.1rem solid var(--primary);
+            transform: scaleX(0);
+            transition: 0.2s linear;
+        }
+        .navigasi a:hover::after {
+            transform: scaleX(1);
+        }
+        div.gallery:hover {
+            border: 1px solid #4b5644;
+        }
+        div.gallery img {
+            width: 100%;
+            height: 230px;
+            object-fit: cover;
+            border-radius: 5px;
+        }
+        div.desc {
+            padding: 15px;
+            text-align: center;
+            background-color: var(--bg);
+            font-size: x-large;
+        }
+        .gallery {
+            padding: 30px;
+            text-align: center;
+            transition: 0.3s;
+        }
+        .gallery:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 8px 20px rgba(0,0,0,0.15);
+        }
+        .pagination {
+            width: 100%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            gap: 20px;
+            padding: 20px 0 30px;
+        }
+        .pagination a {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            width: 40px;
+            height: 40px;
+            background-color: var(--bg);
+            color: var(--primary);
+            border-radius: 50%;
+            font-size: 20px;
+            transition: 0.2s;
+        }
+        .pagination a:hover {
+            background-color: #4b5644;
+        }
+        .pagination a.disabled {
+            background-color: #ccc;
+            pointer-events: none;
+            cursor: default;
+        }
+        .pagination .dots {
+            display: flex;
+            gap: 6px;
+            align-items: center;
+        }
+        .pagination .dot {
+            width: 10px;
+            height: 10px;
+            border-radius: 50%;
+            background-color: #ccc;
+        }
+        .pagination .dot.active {
+            background-color: var(--bg);
+        }
+        .footer {
+            background: var(--primary);
+            border-top: 2px solid var(--bg);
+            width: 100%;
+        }
+        .footer-content {
+            max-width: 1200px;
+            margin: auto;
+            padding: 50px 30px;
+            display: flex;
+            justify-content: space-between;
+            text-align: center;
+        }
+        .footer-box h3 {
+            margin-bottom: 10px;
+            font-size: 20px;
+        }
+        .footer-box p {
+            margin: 5px 0;
+            font-size: 16px;
+        }
+        .copyright {
+            background-color: var(--bg);
+            text-align: center;
+            color: var(--primary);
+            padding: 20px;
+            font-size: 14px;
+            width: 100%;
+        }
