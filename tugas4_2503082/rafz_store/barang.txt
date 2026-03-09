@@ -1,0 +1,4 @@
+Mouse|120000
+hp|12000
+Baju XXL|250000
+Sepatu Compas|245000
