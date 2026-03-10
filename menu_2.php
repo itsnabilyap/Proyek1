@@ -3,6 +3,7 @@
 <head>
     <title>GALERI MENU 2 - C2VIN</title>
     <link rel="stylesheet" href="menu_2.css">
+    <script src="https://unpkg.com/feather-icons"></script>
 </head>
 <body>
 
@@ -17,6 +18,9 @@
             <li><a href="menu.php">Menu</a></li>
             <li><a href="index.php#contact">Contact</a></li>
         </ul>
+        <div class="navbar-extra">
+                <a href="#" id="shopping-cart"><i data-feather="shopping-cart"></i></a>
+        </div>
     </header>
 
     <section class="container" id="menu">
@@ -126,6 +130,10 @@
     <div class="copyright">
         Copyright &copy; c2vin Catering, 2026. All rights reserved.
     </div>
+
+    <script>
+      feather.replace();
+    </script>
 
 </body>
 </html>

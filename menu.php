@@ -3,6 +3,7 @@
 <head>
     <title>GALERI MENU</title>
     <link rel="stylesheet" type="text/css" href="menu.css">
+    <script src="https://unpkg.com/feather-icons"></script>
 </head>
 <body>
 
@@ -17,11 +18,14 @@
             <li><a href="menu.php">Menu</a></li>
             <li><a href="index.php#contact">Contact</a></li>
         </ul>
+        <div class="navbar-extra">
+                <a href="#" id="shopping-cart"><i data-feather="shopping-cart"></i></a>
+        </div>
     </header>
 
     <section class="container" id="menu">
         <div class="gallery">
-            <a target="_blank" href="AmericanBreakfast.jpeg">
+            <a href="dp_american.php">
             <img src="AmericanBreakfast.jpeg" alt="">
             </a>
             <div class="desc">American Breakfast<br>Rp.25.000</div>
@@ -161,6 +165,10 @@
     <div class="copyright">
         Copyright © c2vin Catering, 2026. All rights reserved.
     </div>
+
+    <script>
+      feather.replace();
+    </script>
 
 </body>
 </html>

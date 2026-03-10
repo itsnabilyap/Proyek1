@@ -3,6 +3,7 @@
 <head>
     <title>Keranjang</title>
     <link rel="stylesheet" type="text/css" href="keranjang.css">
+    <script src="https://unpkg.com/feather-icons"></script>
 </head>
 <body>
 
@@ -18,6 +19,10 @@
             <li><a href="index.html#contact">Contact</a></li>
         </ul>
     </header>
+
+    <script>
+      feather.replace();
+    </script>
 
 </body>
 </html>

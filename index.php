@@ -24,6 +24,9 @@
                 <li><a href="menu.php">Menu</a></li>
                 <li><a href="#contact">Contact</a></li>
             </ul>
+            <div class="navbar-extra">
+                <a href="#" id="shopping-cart"><i data-feather="shopping-cart"></i></a>
+            </div>
         </header>
 
     
