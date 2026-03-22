@@ -80,3 +80,22 @@ body {
     width: 40px;
     border-radius: 50%;
 }
+
+.cart-item {
+    display: grid;
+    grid-template-columns: 80px 1fr 120px 100px 120px 50px;
+    align-items: center;
+    gap: 10px;
+    margin-bottom: 15px;
+}
+
+.cart-item img {
+    border-radius: 8px;
+}
+
+select {
+    padding: 5px;
+    background: #7a8f6b;
+    color: white;
+    border: none;
+}

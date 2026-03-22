@@ -19,7 +19,7 @@
             <li><a href="index.php#contact">Contact</a></li>
         </ul>
         <div class="navbar-extra">
-                <a href="#" id="shopping-cart"><i data-feather="shopping-cart"></i></a>
+            <a href="#" id="shopping-cart"><i data-feather="shopping-cart"></i></a>
         </div>
     </header>
 
@@ -97,7 +97,6 @@
 
     </section>
 
-    <!-- Pagination -->
     <div class="pagination">
         <a href="menu.php" title="Previous">&#9664;</a>
         <div class="dots">

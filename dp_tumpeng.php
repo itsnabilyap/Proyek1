@@ -3,6 +3,7 @@
 <head>
     <title>Detail Pesanan</title>
     <link rel="stylesheet" type="text/css" href="detailpesanan.css">
+    <script src="https://unpkg.com/feather-icons"></script>
 </head>
 <body>
 
@@ -12,10 +13,10 @@
                 <h2>C2VIN</h2>
             </div>
             <ul class="navigasi">
-                <li><a href="index.html#home">Home</a></li>
-                <li><a href="index.html#about">About</a></li>
-                <li><a href="menu.html">Menu</a></li>
-                <li><a href="index.html#contact">Contact</a></li>
+                <li><a href="index.php#home">Home</a></li>
+                <li><a href="index.php#about">About</a></li>
+                <li><a href="menu.php">Menu</a></li>
+                <li><a href="index.php#contact">Contact</a></li>
             </ul>
             <div class="navbar-extra">
                 <a href="#" id="shopping-cart"><i data-feather="shopping-cart"></i></a>
@@ -42,7 +43,7 @@
                         </select>
                     </div>
 
-                    <button class="button">Tambahan Pesanan</button>
+                    <button class="button" onclick="addToCart('Tumpeng Normal', 300000, 'tumpeng.jpeg')">Tambah ke Keranjang</button>
                 </div>
             </div>
             <div class="description">
@@ -76,6 +77,12 @@
     <div class="copyright">
         Copyright © c2vin Catering, 2026. All rights reserved.
     </div>
+
+    <script>
+      feather.replace();
+    </script>
+
+    <script src="script.js"></script>
         
 </body>
 </html>

@@ -12,10 +12,10 @@
                 <h2>C2VIN</h2>
             </div>
             <ul class="navigasi">
-                <li><a href="index.html#home">Home</a></li>
-                <li><a href="index.html#about">About</a></li>
-                <li><a href="menu.html">Menu</a></li>
-                <li><a href="index.html#contact">Contact</a></li>
+                <li><a href="index.php#home">Home</a></li>
+                <li><a href="index.php#about">About</a></li>
+                <li><a href="menu.php">Menu</a></li>
+                <li><a href="index.php#contact">Contact</a></li>
             </ul>
             <div class="navbar-extra">
                 <a href="#" id="shopping-cart"><i data-feather="shopping-cart"></i></a>

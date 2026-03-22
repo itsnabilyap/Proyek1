@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     <title>GALERI MENU</title>
-    <link rel="stylesheet" type="text/css" href="menu.css">
+    <link rel="stylesheet" href="menu.css">
     <script src="https://unpkg.com/feather-icons"></script>
 </head>
 <body>
@@ -19,7 +19,7 @@
             <li><a href="index.php#contact">Contact</a></li>
         </ul>
         <div class="navbar-extra">
-                <a href="#" id="shopping-cart"><i data-feather="shopping-cart"></i></a>
+            <a href="#" id="shopping-cart"><i data-feather="shopping-cart"></i></a>
         </div>
     </header>
 

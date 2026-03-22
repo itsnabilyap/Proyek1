@@ -7,7 +7,7 @@
 </head>
 <body>
 
-    <header class="navbar">
+    < class="navbar">
         <div class="logo">
             <img src="logo-brand.jpeg" alt="C2vin Logo">
                 <h2>C2VIN</h2>
@@ -18,6 +18,9 @@
             <li><a href="menu.html">Menu</a></li>
             <li><a href="index.html#contact">Contact</a></li>
         </ul>
+            <div class="navbar-extra">
+                <a href="cart.php" id="shopping-cart"><i data-feather="shopping-cart"></i></a>
+            </div>
     </header>
 
     <script>

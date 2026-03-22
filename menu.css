@@ -11,27 +11,14 @@
 }
 
 body {
-    display: flex;
-    justify-content: center;
-    flex-wrap: wrap;
-    margin: 0;
     font-family: 'Poppins', Arial, sans-serif;
-    background-color: var(--primary);
 }
 
 .container {
     padding-top: 80px;
     display: grid;
     grid-template-columns: repeat(3, 1fr);
-}
-
-div.gallery {
     margin: 25px;
-    border: 1px solid #ccc;
-    width: 350px;
-    background-color: var(--bg);
-    color: var(--primary);
-    padding: 10px;
 }
 
 .navbar {
@@ -65,8 +52,6 @@ div.gallery {
     list-style: none;
     display: flex;
     gap: 25px;
-    margin: 0;
-    padding: 0;
 }
 
 .navigasi {
@@ -89,14 +74,32 @@ div.gallery {
 .navigasi a::after {
     content: '';
     display: block;
-    padding-bottom: 0.1rem;
+    padding-bottom: 0.2rem;
     border-bottom: 0.1rem solid var(--primary);
     transform: scaleX(0);
     transition: 0.2s linear;
 }
 
 .navigasi a:hover::after {
-    transform: scaleX(1);
+    transform: scaleX(0.5);
+}
+
+.navbar-extra a {
+    color: #fff;
+    margin: 0 0.5rem;
+}
+
+.navbar-extra a:hover {
+    color: black;
+}
+
+div.gallery {
+    margin: 25px;
+    border: 1px solid #ccc;
+    width: 350px;
+    background-color: var(--bg);
+    color: var(--primary);
+    padding: 10px;
 }
 
 div.gallery:hover {
@@ -129,47 +132,52 @@ div.desc {
 }
 
 .pagination {
-            width: 100%;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            gap: 20px;
-            padding: 20px 0 30px;
-        }
-        .pagination a {
-            display: inline-flex;
-            align-items: center;
-            justify-content: center;
-            width: 40px;
-            height: 40px;
-            background-color: var(--bg);
-            color: var(--primary);
-            border-radius: 50%;
-            font-size: 20px;
-            transition: 0.2s;
-        }
-        .pagination a:hover {
-            background-color: #4b5644;
-        }
-        .pagination a.disabled {
-            background-color: #ccc;
-            pointer-events: none;
-            cursor: default;
-        }
-        .pagination .dots {
-            display: flex;
-            gap: 6px;
-            align-items: center;
-        }
-        .pagination .dot {
-            width: 10px;
-            height: 10px;
-            border-radius: 50%;
-            background-color: #ccc;
-        }
-        .pagination .dot.active {
-            background-color: var(--bg);
-        }
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 20px;
+    padding: 20px 0 30px;
+}
+
+.pagination a {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 40px;
+    height: 40px;
+    background-color: var(--bg);
+    color: var(--primary);
+    border-radius: 50%;
+    font-size: 20px;
+    transition: 0.2s;
+}
+
+.pagination a:hover {
+    background-color: #4b5644;
+}
+
+.pagination a.disabled {
+    background-color: #ccc;
+    pointer-events: none;
+    cursor: default;
+}
+
+.pagination .dots {
+    display: flex;
+    gap: 6px;
+    align-items: center;
+}
+
+.pagination .dot {
+    width: 10px;
+    height: 10px;
+    border-radius: 50%;
+    background-color: #ccc;
+}
+.pagination .dot.active {
+    background-color: var(--bg);
+}
 
 .footer{
     background: var(--primary);
