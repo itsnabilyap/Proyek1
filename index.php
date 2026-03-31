@@ -95,11 +95,12 @@
     <footer class="footer" id="contact"> 
         <div class="footer-content">
             <div class="footer-box">
-                <h3>Navigation</h3>
-                <p>Home<br>
-                About<br>
-                Menu<br>
-                Contact</p>
+                <p>
+                    <a href="#home">Home</a><br>
+                    <a href="#about">About</a><br>
+                    <a href="menu.php">Menu</a><br>
+                    <a href="#contact">Contact</a>
+                </p>
             </div>
             <div class="footer-box">
                 <h3>C2VIN Catering</h3>

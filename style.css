@@ -104,7 +104,7 @@ body {
 
 .hero {
     height: 100vh;
-    background: linear-gradient(rgba(0,0,0,0.2), rgba(0,0,0,0.2)), url('Gambar-home.jpeg');
+    background: linear-gradient(rgba(255,255,255,0.5)), url('Gambar-home.jpeg');
     background-size:cover;
     background-position: center;
     display: flex;
@@ -117,7 +117,6 @@ body {
 .hero h2 {
     font-size: 24px;
     color: #000;
-    text-shadow: 1px 1px 3px rgba(0,0,0,0.4);
     line-height: 1.2;
     margin-bottom: 40px;
 }
