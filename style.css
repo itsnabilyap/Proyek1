@@ -8,7 +8,6 @@
     padding: 0;
     box-sizing: border-box;
     text-decoration: none;
-    
 }
 
 body {
@@ -56,7 +55,7 @@ body {
     border-radius: 50%;
 }
 
-.navbar ul {
+.navbar a {
     list-style: none;
     display: flex;
     gap: 25px;
