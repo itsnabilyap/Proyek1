@@ -3,32 +3,15 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>C2VIN CATERING</title>
-
-    <script src="https://unpkg.com/feather-icons"></script>
-
-    <link rel="stylesheet" href="style.css">
+    <title>C2VIN Catering</title>
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="css/navbar.css">
 
 </head>
 
 <body>
 
-        <header class="navbar">
-            <div class="logo">
-                <img src="logo-brand.jpeg" alt="C2vin Logo">
-                <h2>C2VIN</h2>
-            </div>
-            <ul class="navigasi">
-                <li><a href="#home">Home</a></li>
-                <li><a href="#about">About</a></li>
-                <li><a href="menu.php">Menu</a></li>
-                <li><a href="#contact">Contact</a></li>
-            </ul>
-            <div class="navbar-extra">
-                <a href="#" id="shopping-cart"><i data-feather="shopping-cart"></i></a>
-            </div>
-        </header>
-
+    <?php include 'partials/navbar.php'; ?> 
     
     <section class="hero" id="home">
         <div class="content">
@@ -63,11 +46,11 @@
     <section class="feature-section">
         <div class="flex-container">
             <div class="feature-img">
-                <img src="tumpeng.jpeg" alt="Tumpeng Besar">
+                <img src="img/Tumpeng.jpeg" alt="Tumpeng Besar">
             </div>
             <div class="feature-text">
-                <h2>C2vin catering yang cocok untuk<br>segala acara</h2>
-                <p>Dipercaya oleh berbagai lembaga terkemuka dan<br>perorangan.</p>
+                <h2>C2VIN Catering yang cocok untuk segala acara</h2>
+                <p>Dipercaya oleh berbagai lembaga terkemuka dan perorangan.<br>                   <br></p>
                 <button class="tekan">Lihat Menu</button>
             </div>
         </div>
@@ -77,54 +60,29 @@
         <div class="container">
             <div class="gallery-grid">
                 <div class="card">
-                    <img src="tumpeng.jpeg" alt="Tumpeng">
+                    <img src="img/Tumpeng.jpeg" alt="Tumpeng">
                     <p>Tumpeng</p>
                 </div>
                 <div class="card">
-                    <img src="AmericanBreakfast.jpeg" alt="American Breakfast">
+                    <img src="img/AmericanBreakfast.jpeg" alt="American Breakfast">
                     <p>American Breakfast</p>
                 </div>
                 <div class="card">
-                    <img src="ricebowl.jpeg" alt="Ricebowl">
+                    <img src="img/ricebowl.jpeg" alt="Ricebowl">
                     <p>Ricebowl</p>
                 </div>
             </div>
         </div>
     </section>
 
-    <footer class="footer" id="contact"> 
-        <div class="footer-content">
-            <div class="footer-box">
-                <p>
-                    <a href="#home">Home</a><br>
-                    <a href="#about">About</a><br>
-                    <a href="menu.php">Menu</a><br>
-                    <a href="#contact">Contact</a>
-                </p>
-            </div>
-            <div class="footer-box">
-                <h3>C2VIN Catering</h3>
-                <p>Jl. Letnan Sutejo, No.74<br>
-                Kelurahan Margadadi,<br>
-                Indramayu</p>
-            </div> 
-            <div class="footer-box">
-                <h3>Contact WhatsApp</h3>
-                <p>+62 877-2753-1916 (Liska)<br>
-                +62 878-2691-3182 (Azwar)</p>
-            </div>
-        </div>
-    </footer>
+    <?php include 'partials/footer.php'; ?>
 
-    <div class="copyright">
-        Copyright © c2vin Catering, 2026. All rights reserved.
-    </div>
-
-     <script>
+    <script src="https://unpkg.com/feather-icons"></script>
+    <script>
       feather.replace();
     </script>
 
-    <script src="script.js"></script>
+    <script src="cart.js"></script>
 
 </body>
 

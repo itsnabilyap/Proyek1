@@ -1,174 +1,107 @@
+<?php include 'database.php'; ?>
+
+<?php
+$limit = 15;
+
+$page = isset($_GET['page']) ? (int)$_GET['page'] : 1;
+$start = ($page - 1) * $limit;
+
+$query = $conn->query("
+    SELECT * FROM menu
+    WHERE status='Tersedia'
+    LIMIT $start, $limit
+");
+
+$result_total = $conn->query("
+    SELECT COUNT(*) as total
+    FROM menu
+    WHERE status='Tersedia'
+");
+$data_total = $result_total->fetch_assoc();
+$total_data = $data_total['total'];
+$total_page = ceil($total_data / $limit);
+?>
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <title>GALERI MENU</title>
-    <link rel="stylesheet" href="menu.css">
-    <script src="https://unpkg.com/feather-icons"></script>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Galeri Menu</title>
+    <link rel="stylesheet" href="css/menu.css">
+    <link rel="stylesheet" href="css/navbar.css">
 </head>
 <body>
 
-    <header class="navbar">
-        <div class="logo">
-            <img src="logo-brand.jpeg" alt="C2vin Logo">
-                <h2>C2VIN</h2>
-        </div>
-        <ul class="navigasi">
-            <li><a href="index.php#home">Home</a></li>
-            <li><a href="index.php#about">About</a></li>
-            <li><a href="menu.php">Menu</a></li>
-            <li><a href="index.php#contact">Contact</a></li>
-        </ul>
-        <div class="navbar-extra">
-            <a href="#" id="shopping-cart"><i data-feather="shopping-cart"></i></a>
-        </div>
-    </header>
+<?php include 'partials/navbar.php'; ?>
 
-    <section class="container" id="menu">
-        <div class="gallery">
-            <a href="dp_american.php">
-            <img src="AmericanBreakfast.jpeg" alt="">
+<section class="container" id="menu">
+
+<?php while($row = $query->fetch_assoc()) { ?>
+
+    <div class="gallery <?= $row['status'] === 'Tersedia' ? 'Tersedia' : '' ?>">
+
+        <?php if ($row['status'] === 'Tersedia'): ?>
+            <a href="detail.php?id=<?= $row['id_menu']; ?>">
+        <?php endif; ?>
+
+            <img src="img/<?= $row['foto_produk']; ?>" alt="">
+
+        <?php if ($row['status'] === 'Tersedia'): ?>
             </a>
-            <div class="desc">American Breakfast<br>Rp.25.000</div>
+        <?php endif; ?>
+
+        <!-- Overlay HABIS -->
+        <?php if ($row['status'] === 'Habis'): ?>
+            <div class="overlay-habis">HABIS</div>
+        <?php endif; ?>
+
+        <div class="desc">
+            <?= $row['nama_paket']; ?><br>
+            Rp.<?= number_format($row['harga'], 0, ',', '.'); ?>
         </div>
 
-        <div class="gallery">
-            <a target="_blank" href="ricebowl.jpeg">
-                <img src="ricebowl.jpeg" alt=""> 
-            </a>
-            <div class="desc">Ricebowl<br>Rp.18.000</div>
-        </div>
-
-        <div class="gallery">
-            <a href="dp_tumpeng.php">
-                <img src="tumpeng.jpeg" alt="">
-            </a>
-            <div class="desc">Tumpeng<br>Rp.300.000</div>
-        </div>
-
-        <div class="gallery">
-            <a target="_blank" href="liwet.jpeg">
-            <img src="liwet.jpeg" alt="">
-            </a>
-            <div class="desc">Paket Nasi Liwet<br>Rp.18.000</div>
-        </div>
-
-        <div class="gallery">
-            <a target="_blank" href="bakar.jpeg">
-                <img src="bakar.jpeg" alt=""> 
-            </a>
-            <div class="desc">Paket Ayam Bakar<br>Rp.18.000</div>
-        </div>
-
-        <div class="gallery">
-            <a target="_blank" href="bistikdaging.jpeg">
-                <img src="bistikdaging.jpeg" alt="">
-            </a>
-            <div class="desc">Paket Nasi Bistik Daging<br>Rp.23.000</div>
-        </div>
-
-        <div class="gallery">
-            <a target="_blank" href="geprek.jpeg">
-            <img src="geprek.jpeg" alt="">
-            </a>
-            <div class="desc">Paket Ayam Geprek<br>Rp.15.000</div>
-        </div>
-
-        <div class="gallery">
-            <a target="_blank" href="kuning.jpeg">
-                <img src="kuning.jpeg" alt=""> 
-            </a>
-            <div class="desc">Paket Nasi Kuning<br>Rp.6.000</div>
-        </div>
-
-        <div class="gallery">
-            <a target="_blank" href="campur.jpeg">
-                <img src="campur.jpeg" alt="">
-            </a>
-            <div class="desc">Paket Nasi Campur<br>Rp.300.000</div>
-        </div>
-
-        <div class="gallery">
-            <a target="_blank" href="buah.jpeg">
-            <img src="buah.jpeg" alt="">
-            </a>
-            <div class="desc">Paket Buah Nampan<br>Rp.5.000</div>
-        </div>
-
-        <div class="gallery">
-            <a target="_blank" href="kotak.jpeg">
-                <img src="kotak.jpeg" alt=""> 
-            </a>
-            <div class="desc">Paket Nasi Kotak<br>Rp.26.000</div>
-        </div>
-
-        <div class="gallery">
-            <a target="_blank" href="risol.jpeg">
-                <img src="risol.jpeg" alt="">
-            </a>
-            <div class="desc">Paket Risol Ayam<br>Rp.3.000</div>
-        </div>
-
-        <div class="gallery">
-            <a target="_blank" href="kolek.jpeg">
-            <img src="kolek.jpeg" alt="">
-            </a>
-            <div class="desc">Paket Kolek Pisang<br>Rp.5.000</div>
-        </div>
-
-        <div class="gallery">
-            <a target="_blank" href="kue.jpeg">
-                <img src="kue.jpeg" alt=""> 
-            </a>
-            <div class="desc">Paket Kue Lebaran<br>Rp.40.000</div>
-        </div>
-
-        <div class="gallery">
-            <a target="_blank" href="lada.jpeg">
-                <img src="lada.jpeg" alt="">
-            </a>
-            <div class="desc">Paket Rice Bowl Chicken Lada Hitam<br>Rp.17.000</div>
-        </div>
-    </section>
-
-    <div class="pagination">
-        <a href="#" class="disabled" title="Previous">&#9664;</a>
-        <div class="dots">
-            <div class="dot active"></div>
-            <div class="dot"></div>
-        </div>
-        <a href="menu_2.php" title="Next">&#9654;</a>
     </div>
 
-<footer class="footer"> 
-    <div class="footer-content">
-        <div class="footer-box">
-            <h3>Navigation</h3>
-            <p>Home<br>
-            About<br>
-            Menu<br>
-            Contact</p>
-        </div>
-        <div class="footer-box">
-            <h3>C2VIN Catering</h3>
-            <p>Jl. Letnan Sutejo, No.74<br>
-            Kelurahan Margadadi,<br>
-            Indramayu</p>
-        </div> 
-        <div class="footer-box">
-            <h3>Contact WhatsApp</h3>
-            <p>+62 877-2753-1916 (Liska)<br>
-            +62 878-2691-3182 (Azwar)</p>
-        </div>
-    </div>
-</footer>
+<?php } ?>
 
-    <div class="copyright">
-        Copyright © c2vin Catering, 2026. All rights reserved.
+</section>
+
+<div class="pagination">
+
+    <?php if($page > 1): ?>
+        <a href="?page=<?php echo $page-1; ?>">&#9664;</a>
+    <?php else: ?>
+        <a class="disabled">&#9664;</a>
+    <?php endif; ?>
+
+
+    <div class="dots">
+        <?php for($i = 1; $i <= $total_page; $i++): ?>
+            <a href="?page=<?php echo $i; ?>">
+                <div class="dot <?php echo ($i == $page) ? 'active' : ''; ?>"></div>
+            </a>
+        <?php endfor; ?>
     </div>
+
+
+    <?php if($page < $total_page): ?>
+        <a href="?page=<?php echo $page+1; ?>">&#9654;</a>
+    <?php else: ?>
+        <a class="disabled">&#9654;</a>
+    <?php endif; ?>
+
+</div>
+
+<?php include 'partials/footer.php'; ?>
+
+    <script src="https://unpkg.com/feather-icons"></script>
 
     <script>
       feather.replace();
     </script>
+
+    <script src="cart.js"></script>
 
 </body>
 </html>

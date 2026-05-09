@@ -1,31 +1,149 @@
+<?php
+include 'database.php';
+
+if (isset($_POST['order'])) {
+    $nama = $_POST['nama'];
+    $hp = $_POST['hp'];
+    $alamat = $_POST['alamat'];
+
+    // VALIDASI
+    if (!preg_match("/^[A-Za-z ]+$/", $nama)) {
+        echo "<script>alert('Nama hanya boleh huruf!');</script>";
+        exit;
+    }
+
+    if (!preg_match("/^[0-9]+$/", $hp)) {
+        echo "<script>alert('No HP hanya angka!');</script>";
+        exit;
+    }
+
+    // AMBIL CART
+    $cart = json_decode($_POST['cart_data'], true);
+
+    // SIMPAN DB
+    $stmt = $conn->prepare("INSERT INTO pelanggan (nama, no_hp, alamat) VALUES (?, ?, ?)");
+    $stmt->bind_param("sss", $nama, $hp, $alamat);
+    $stmt->execute();
+
+    // BUAT PESAN WA
+    $pesan = "Halo C2VIN Catering, saya ingin memesan:\n\n";
+$pesan .= "Nama: $nama\n";
+$pesan .= "No HP: $hp\n";
+$pesan .= "Alamat: $alamat\n\n";
+$pesan .= "Detail Pesanan:\n\n";
+
+$total = 0;
+
+foreach ($cart as $i => $item) {
+    $subtotal = $item['harga'] * $item['qty'];
+    $total += $subtotal;
+
+    $pesan .= ($i+1).". ".$item['nama']."\n";
+    $pesan .= "   Jumlah: ".$item['qty']." ".$item['tipe']."\n";
+    $pesan .= "   Subtotal: Rp. ".number_format($subtotal,0,',','.')."\n\n";
+}
+
+$pesan .= "--------------------------\n";
+$pesan .= "Total Pesanan: Rp. ".number_format($total,0,',','.')."\n";
+
+$wa = "6287826913182";
+
+// WAJIB encode
+$link = "https://wa.me/".$wa."?text=".urlencode($pesan);
+
+echo "<script>
+alert('Pesanan berhasil dikirim!');
+localStorage.removeItem('cart');
+window.location.href='$link';
+</script>";
+}
+?>
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Keranjang</title>
-    <link rel="stylesheet" type="text/css" href="keranjang.css">
+    <link rel="stylesheet" href="css/navbar.css">
+    <link rel="stylesheet" href="css/keranjang.css">
     <script src="https://unpkg.com/feather-icons"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
 </head>
 <body>
 
-    < class="navbar">
-        <div class="logo">
-            <img src="logo-brand.jpeg" alt="C2vin Logo">
-                <h2>C2VIN</h2>
-        </div>
-        <ul class="navigasi">
-            <li><a href="index.html#home">Home</a></li>
-            <li><a href="index.html#about">About</a></li>
-            <li><a href="menu.html">Menu</a></li>
-            <li><a href="index.html#contact">Contact</a></li>
-        </ul>
-            <div class="navbar-extra">
-                <a href="cart.php" id="shopping-cart"><i data-feather="shopping-cart"></i></a>
+    <?php include 'partials/navbar.php'; ?>
+
+<div class="cart-container" id="keranjang">
+
+    <h2 class="title">Pesanan Saya</h2>
+
+    <div class="grid">
+
+        <div class="card left">
+            <div class="table-head">
+                <div>Produk</div>
+                <div>Harga</div>
+                <div>/Paket</div>
+                <div>Total</div>
+                <div></div>
             </div>
-    </header>
+
+            <div id="cart-items"></div>
+            
+        </div>
+
+        <form method="POST" class="card right">
+
+            <input type="hidden" name="cart_data" id="cart_data">
+
+            <div class="section-title"><i class="fa fa-user"></i> Data Pemesan</div>
+
+            <div class="form-group">
+                    <label>Nama</label>
+                    <input type="text" name="nama" id="nama" placeholder="Masukkan nama" pattern="^[A-Za-z ]+$"
+                    title="Nama hanya boleh huruf dan spasi"
+                    required>
+            </div>
+
+            <div class="form-group">
+                    <label>No HP</label>
+                    <input type="text" name="hp" id="hp" placeholder="Masukkan nomor HP" pattern="^[0-9]+$"
+                    title="Nomor HP hanya boleh angka"
+                    required>
+            </div>
+
+            <div class="form-group">
+                <label>Alamat</label>
+                <textarea id="alamat" name="alamat" placeholder="Masukkan alamat" required></textarea>
+            </div>
+
+            <div class="section-title">
+                <i class="fa fa-file"></i> Total Pesanan
+            </div>
+
+            <div class="total-box">
+                <span>Total</span>
+                <span id="total" style="font-weight: bold;">Rp. 0</span>
+            </div>
+
+            <button type="submit" name="order" class="order-btn" onclick="return checkoutWA()">
+            Order Sekarang
+            </button>
+
+        </form>
+            
+    </div>
+</div>
+
+    <?php include 'partials/footer.php'; ?> 
 
     <script>
       feather.replace();
     </script>
+
+    <script src="cart.js"></script>
 
 </body>
 </html>

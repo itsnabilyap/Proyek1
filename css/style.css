@@ -1,3 +1,7 @@
+html {
+    scroll-behavior: smooth;
+}
+
 :root {
     --primary: #f9fce9;
     --bg: #728663;
@@ -28,82 +32,10 @@ body {
     
 }
 
-.navbar {
-    width: 100%;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    padding: 4px 3%;
-    background-color: var(--bg);
-    color: var(--primary);
-    position: fixed;
-    top: 0;
-    z-index: 1030;
-}
- 
-.navbar .logo {
-    font-weight: bold;
-    font-size: 16px;
-    display: flex;
-    align-items: center;
-    gap: 10px;
-    font-weight: bold;
-}
-
-.logo img {
-    width: 40px;
-    border-radius: 50%;
-}
-
-.navbar a {
-    list-style: none;
-    display: flex;
-    gap: 25px;
-}
-
-.navigasi {
-    list-style: none;
-    display: flex;
-    gap: 20px;
-}
-
-.navigasi a {
-    color: var(--primary);
-    display: inline-block;
-    font-size: 16px;
-    margin: 0 16px;
-}
-
-.navigasi ul li a:hover {
-    color: var(--primary);
-}
-
-.navigasi a::after {
-    content: '';
-    display: block;
-    padding-bottom: 0.2rem;
-    border-bottom: 0.1rem solid var(--primary);
-    transform: scaleX(0);
-    transition: 0.2s linear;
-}
-
-.navigasi a:hover::after {
-    transform: scaleX(0.5);
-}
-
-.navbar-extra a {
-    color: #fff;
-    margin: 0 0.5rem;
-}
-
-.navbar-extra a:hover {
-    color: black;
-}
-
 
 .hero {
     height: 100vh;
-    background: linear-gradient(rgba(255,255,255,0.5)), url('Gambar-home.jpeg');
+    background: linear-gradient(rgba(255,255,255,0.5)), url('../img/Gambar-home.jpeg');
     background-size:cover;
     background-position: center;
     display: flex;
@@ -157,7 +89,7 @@ body {
 }
 
 .info-box p {
-    font-size: 14-x;
+    font-size: 14px;
     opacity: 0.9;
     line-height: 1.6;
 }
@@ -258,64 +190,4 @@ body {
     color: var(--bg); 
     font-weight: bold;
     font-size: 18px;
-}
-
-.footer{
-    background: var(--primary);
-}
-
-.footer-content{
-    max-width: 1200px;
-    margin: auto;
-    padding: 50px 30px;
-    display: flex;
-    justify-content: space-between;
-    text-align: center;
-}
-
-.footer-box h3{
-    margin-bottom: 10px;
-    font-size: 20px;
-}
-
-.footer-box p{
-    margin: 5px 0;
-    font-size: 16px;
-}
-
-.copyright {
-    background-color: var(--bg);
-    text-align: center;
-    color: var(--primary);
-    padding: 20px;
-    font-size: 12px;
-    width: 100%;
-    font-size: 14px;
-}
-
-/* Media Queries */
-
-
-/* Laptop */
-@media (max-width: 1366px) {
-    html {
-        font-size: 75%;
-    }
-
-}
-
-/* Tablet */
-@media (max-width: 768px) {
-    html {
-        font-size: 62.5%;
-    }
-
-}
-
-/* Mobile Phone */
-@media (max-width: 450px) {
-    html {
-        font-size: 55%;
-    }
-
 }

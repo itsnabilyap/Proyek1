@@ -1,0 +1,284 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Poppins', sans-serif;
+}
+
+body {
+    display: flex;
+    background-color: #e6e6d6;
+}
+
+/* ================== SIDEBAR ================== */
+.sidebar {
+    width: 220px;
+    height: 100vh;
+    background-color: #6f8a67;
+    padding: 20px;
+    color: white;
+    display: flex;
+    flex-direction: column;
+    position: fixed;
+    top: 0;
+    left: 0;
+}
+
+.logo {
+    width: 80px;
+    display: block;
+    margin: 20px auto;
+}
+
+.btn-back {
+    background: #dcdcc8;
+    border: none;
+    padding: 8px 15px;
+    border-radius: 20px;
+    cursor: pointer;
+}
+
+.menu-active {
+    margin-top: 30px;
+    background: #dcdcc8;
+    color: black;
+    text-align: center;
+    padding: 10px;
+    border-radius: 20px;
+    font-weight: 500;
+}
+
+.menu-item {
+    margin-top: 10px;
+    background: #dcdcc8;
+    color: black;
+    text-align: center;
+    padding: 10px;
+    border-radius: 20px;
+    text-decoration: none;
+    display: block;
+}
+
+.menu-item:hover {
+    background: #cfcfb5;
+}
+
+/* Spacer mendorong admin-info ke paling bawah */
+.sidebar-spacer {
+    flex: 1;
+}
+
+/* Info Admin */
+.admin-info {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    padding: 12px;
+    background-color: rgba(0, 0, 0, 0.15);
+    border-radius: 12px;
+    /* TIDAK ada margin-top agar spacer yang bekerja */
+}
+
+.admin-avatar {
+    width: 40px;
+    height: 40px;
+    background-color: #dcdcc8;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: #6f8a67;
+    font-weight: bold;
+    font-size: 18px;
+    flex-shrink: 0;
+}
+
+.admin-detail {
+    display: flex;
+    flex-direction: column;
+    overflow: hidden;
+}
+
+.admin-name {
+    color: white;
+    font-weight: 600;
+    font-size: 13px;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+.admin-id {
+    color: #dcdcc8;
+    font-size: 11px;
+}
+
+/* Tombol Logout */
+.btn-logout {
+    display: block;
+    margin-top: 10px;
+    padding: 10px;
+    background-color: transparent;
+    border: 1.5px solid #e03131;
+    color: #e03131;
+    text-align: center;
+    border-radius: 20px;
+    text-decoration: none;
+    font-weight: 600;
+    font-size: 13px;
+    transition: background 0.2s, color 0.2s;
+}
+
+.btn-logout:hover {
+    background-color: #e03131;
+    color: white;
+}
+
+/* ================== MAIN ================== */
+.main {
+    flex: 1;
+    padding: 30px;
+    margin-left: 220px; /* agar tidak tertutup sidebar fixed */
+}
+
+.header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 15px;
+}
+
+.header h1 {
+    white-space: nowrap;
+}
+
+/* tombol tambah tetap di kanan */
+.btn-add {
+    background: #6f8a67;
+    color: white;
+    padding: 10px 20px;
+    border-radius: 20px;
+    text-decoration: none;
+    white-space: nowrap;
+}
+
+/* ================== TABLE ================== */
+.table-container {
+    margin-top: 20px;
+    overflow-x: auto;
+}
+
+table {
+    width: 100%;
+    border-collapse: collapse;
+    background: #7a8f6f;
+    color: white;
+    border-radius: 10px;
+    overflow: hidden;
+}
+
+th, td {
+    padding: 15px;
+    text-align: center;
+    border: 1px solid rgba(255,255,255,0.3);
+}
+
+th {
+    background: #6f8a67;
+}
+
+.menu-img {
+    width: 100px;
+    height: 80px;
+    border-radius: 10px;
+}
+
+/* ================== TOGGLE ================== */
+.switch {
+    position: relative;
+    display: inline-block;
+    width: 50px;
+    height: 24px;
+}
+
+.switch input {
+    display: none;
+}
+
+.slider {
+    position: absolute;
+    cursor: pointer;
+    inset: 0;
+    background: #ccc;
+    border-radius: 24px;
+    transition: 0.3s;
+}
+
+.slider::before {
+    content: "";
+    position: absolute;
+    width: 18px;
+    height: 18px;
+    left: 3px;
+    bottom: 3px;
+    background: white;
+    border-radius: 50%;
+    transition: 0.3s;
+}
+
+.switch input:checked + .slider {
+    background: #4CAF50;
+}
+
+.switch input:checked + .slider::before {
+    transform: translateX(26px);
+}
+
+.status {
+    font-size: 12px;
+    margin-top: 5px;
+}
+
+.header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 10px;
+}
+
+/* Search di tengah */
+.search-form {
+    flex: 1;
+    display: flex;
+    justify-content: center;
+}
+
+.search-form input {
+    width: 260px;
+    padding: 8px 15px;
+    border-radius: 20px;
+    border: none;
+    outline: none;
+    background: #dcdcc8;
+}
+
+
+
+.status-badge {
+    padding: 6px 10px;
+    border-radius: 20px;
+    color: white;
+    font-size: 12px;
+    display: inline-block;
+}
+
+.pending { background: orange; }
+.dikonfirmasi { background: blue; }
+.diproses { background: purple; }
+.selesai { background: green; }
+.dibatalkan { background: red; }
+
+select {
+    padding: 5px;
+    border-radius: 5px;
+}
