@@ -37,7 +37,7 @@ $data = $query->fetch_assoc();
                 <label>/Paket</label>
                 <select id="pilihan-jumlah">
                     <?php
-                $menuPaket = [1, 2, 3]; // isi dengan ID menu yang pakai "paket"
+                $menuPaket = [1, 2, 3];
                 ?>
                     <?php if (in_array($data['id_menu'], $menuPaket)) { ?>
                     <option value="" disabled selected>Pilih Jumlah</option>

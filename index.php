@@ -16,7 +16,9 @@
     <section class="hero" id="home">
         <div class="content">
             <h2>Pilihan Menu Terbaik Untuk Setiap Acara</h2>
-            <button class="cta">Lihat Menu</button>
+            <button class="cta" onclick="location.href='menu.php'">
+    Lihat Menu
+</button>
         </div>
     </section>
 
@@ -35,9 +37,8 @@
                     <h3>Dimasak dengan sepenuh hati, disajikan dengan kualitas</h3>
                     <p>Setiap hidangan diolah dengan bahan pilihan, higienis, dan cita rasa yang memuaskan.</p>
                 </div>
-                    <button class="tombol">Pesan Sekarang</button>
-                </div>
-                <div class="about-logo">
+            </div>
+            <div class="about-logo">
                 <img src="logo-brand.jpeg" alt="C2vin Logo">
             </div>
         </div>
@@ -51,7 +52,9 @@
             <div class="feature-text">
                 <h2>C2VIN Catering yang cocok untuk segala acara</h2>
                 <p>Dipercaya oleh berbagai lembaga terkemuka dan perorangan.<br>                   <br></p>
-                <button class="tekan">Lihat Menu</button>
+                <button class="cta" onclick="location.href='menu.php'">
+                    Lihat Menu
+                </button>
             </div>
         </div>
     </section>

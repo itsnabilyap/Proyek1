@@ -151,7 +151,6 @@ div.desc {
     overflow: hidden;
 }
 
-/* GAMBAR JADI ABU */
 .gallery.habis img {
     filter: grayscale(100%);
     opacity: 0.6;

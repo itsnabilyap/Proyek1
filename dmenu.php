@@ -11,7 +11,7 @@ if ($conn->connect_error) {
     die("Koneksi gagal: " . $conn->connect_error);
 }
 
-/* ================== TOGGLE STATUS ================== */
+/*TOGGLE STATUS*/
 if (isset($_POST['toggle'])) {
     $id     = (int)$_POST['id'];
     $status = $_POST['status'];
@@ -24,12 +24,11 @@ if (isset($_POST['toggle'])) {
     exit;
 }
 
-/* ================== HAPUS MENU ================== */
+/*HAPUS MENU*/
 if (isset($_POST['hapus'])) {
 
     $id = (int)$_POST['id'];
 
-    // ambil foto dulu
     $get = $conn->prepare("SELECT foto_produk FROM menu WHERE id_menu=?");
     $get->bind_param("i", $id);
     $get->execute();
@@ -37,7 +36,6 @@ if (isset($_POST['hapus'])) {
     $resultFoto = $get->get_result();
     $dataFoto = $resultFoto->fetch_assoc();
 
-    // hapus file gambar jika ada
     if ($dataFoto && $dataFoto['foto_produk'] != '') {
 
         $path = "img/" . $dataFoto['foto_produk'];
@@ -47,7 +45,6 @@ if (isset($_POST['hapus'])) {
         }
     }
 
-    // hapus data menu
     $stmt = $conn->prepare("DELETE FROM menu WHERE id_menu=?");
     $stmt->bind_param("i", $id);
 
@@ -67,20 +64,19 @@ if (isset($_POST['hapus'])) {
     exit;
 }
 
-/* ================== PAGINATION ================== */
-$limit = 10; // jumlah data per halaman
+/*PAGINATION*/
+$limit = 10;
 $page  = isset($_GET['page']) ? (int)$_GET['page'] : 1;
 
 if ($page < 1) $page = 1;
 
 $start = ($page - 1) * $limit;
 
-// hitung total data
 $totalQuery = $conn->query("SELECT COUNT(*) as total FROM menu");
 $totalData  = $totalQuery->fetch_assoc()['total'];
 $totalPages = ceil($totalData / $limit);
 
-/* ================== SEARCH ================== */
+/*SEARCH*/
 $keyword = isset($_GET['keyword']) ? $_GET['keyword'] : '';
 
 if ($keyword != '') {
@@ -111,7 +107,7 @@ if ($keyword != '') {
     ");
 }
 
-/* ================== TAMBAH MENU ================== */
+/*TAMBAH MENU*/
 if (isset($_POST['tambah_menu'])) {
 
     $nama       = $_POST['nama_paket'];
@@ -120,7 +116,6 @@ if (isset($_POST['tambah_menu'])) {
 
     $foto = '';
 
-    // upload gambar
     if ($_FILES['foto_produk']['name'] != '') {
 
         $foto = time() . '_' . $_FILES['foto_produk']['name'];
@@ -161,7 +156,7 @@ if (isset($_POST['tambah_menu'])) {
     }
 }
 
-/* ================== EDIT MENU ================== */
+/*EDIT MENU*/
 if (isset($_POST['edit_menu'])) {
 
     $id         = $_POST['id_menu'];
@@ -171,7 +166,6 @@ if (isset($_POST['edit_menu'])) {
 
     $foto = "";
 
-    // cek upload gambar
     if ($_FILES['foto_produk']['name'] != '') {
 
         $foto = time() . '_' . $_FILES['foto_produk']['name'];
@@ -251,14 +245,16 @@ body {
     background:#f5f5f5;
 }
 
-/* SIDEBAR */
-.sidebar {
+.sidebar{
     width:240px;
     height:100vh;
-    background: #728663;
+    background:#728663;
     color:white;
     padding:20px;
     position:fixed;
+    display:flex;
+    flex-direction:column;
+    justify-content:space-between;
 }
 
 .logo {
@@ -292,14 +288,12 @@ body {
     margin-right:10px;
 }
 
-/* MAIN */
 .main {
     margin-left:240px;
     width:100%;
     padding:20px;
 }
 
-/* TOPBAR */
 .topbar {
     display:flex;
     justify-content:space-between;
@@ -307,7 +301,6 @@ body {
     margin-bottom:20px;
 }
 
-/* HEADER */
 .header-menu {
     display:flex;
     justify-content:space-between;
@@ -336,7 +329,6 @@ body {
     outline:none;
 }
 
-/* TABLE */
 .table-box {
     background: #728663;
     color: #ccc;
@@ -369,7 +361,6 @@ th, td {
     object-fit:cover;
 }
 
-/* TOGGLE */
 .status-btn {
     border: none;
     padding: 6px 12px;
@@ -380,17 +371,14 @@ th, td {
     font-size: 13px;
 }
 
-/* HIJAU = TERSEDIA */
 .status-btn.tersedia {
     background: #4CAF50;
 }
 
-/* MERAH = HABIS */
 .status-btn.habis {
     background: #f44336;
 }
 
-/* BUTTON */
 .action-btn {
     border:none;
     padding:6px 10px;
@@ -432,7 +420,6 @@ th, td {
     color:white;
 }
 
-/* SIDEBAR TOGGLE */
 .sidebar.hide {
     transform: translateX(-100%);
 }
@@ -441,7 +428,6 @@ th, td {
     margin-left:0;
 }
 
-/* MODAL */
 .modal{
     position:fixed;
     top:0;
@@ -533,12 +519,29 @@ th, td {
     cursor:pointer;
 }
 
+.btn-logout{
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    gap:8px;
+
+    padding:12px;
+    border-radius:12px;
+
+    background:white;
+    color:#728663;
+
+    text-decoration:none;
+    font-weight:600;
+
+    margin-top:auto;
+}
+
 </style>
 </head>
 
 <body>
 
-<!-- SIDEBAR -->
 <div class="sidebar">
     <div class="logo">
         <img src="logo-brand.jpeg">
@@ -553,12 +556,13 @@ th, td {
         <a href="dmenu.php" class="active"><i class="bi bi-list"></i>Menu</a>
         <a href="dpesanan.php"><i class="bi bi-receipt"></i>Pesanan</a>
     </div>
+
+    <a href="admin.php" class="btn-logout">Logout</a>
+
 </div>
 
-<!-- MAIN -->
 <div class="main">
 
-    <!-- TOPBAR -->
     <div class="topbar">
         <div style="display:flex; align-items:center; gap:15px;">
             <i class="bi bi-list" onclick="toggleSidebar()" style="cursor:pointer;"></i>
@@ -566,7 +570,6 @@ th, td {
         </div>
     </div>
 
-    <!-- HEADER -->
     <div class="header-menu">
         <div>
             <h2>Daftar Menu</h2>
@@ -585,7 +588,6 @@ th, td {
         </div>
     </div>
 
-    <!-- TABLE -->
     <div class="table-box">
         <table>
             <tr>
@@ -671,7 +673,6 @@ th, td {
 
 </div>
 
-<!-- MODAL TAMBAH -->
 <div class="modal" id="tambahModal">
 
     <div class="modal-content">
@@ -720,7 +721,6 @@ th, td {
 
 </div>
 
-<!-- MODAL EDIT -->
 <div class="modal" id="editModal">
 
     <div class="modal-content">
@@ -789,14 +789,11 @@ function ubahStatus(id, el) {
 
         if (res.success) {
 
-            // update warna tombol
             el.classList.toggle("tersedia");
             el.classList.toggle("habis");
 
-            // update text tombol
             el.innerText = newStatus;
 
-            // ALERT
             if(newStatus == "Tersedia"){
                 alert("Menu berhasil diubah menjadi TERSEDIA");
             } else {
@@ -826,7 +823,6 @@ function hapusMenu(id, el) {
     .then(res => res.json())
     .then(res => {
         if (res.success) {
-            // hapus baris tabel
             el.closest("tr").remove();
         } else {
             alert('Gagal hapus');

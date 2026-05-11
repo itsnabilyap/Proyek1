@@ -8,24 +8,20 @@ if (!isset($_SESSION['admin'])) {
     exit;
 }
 
-/* ================= TOTAL DATA ================= */
+/*TOTAL DATA*/
 
-// total pesanan
 $totalPesanan = $conn->query("SELECT COUNT(*) as total FROM detail_pesanan")
                       ->fetch_assoc()['total'];
 
-// total menu
 $totalMenu = $conn->query("
     SELECT COUNT(*) as total 
     FROM menu
     WHERE status='tersedia'
 ")->fetch_assoc()['total'];
 
-// total pelanggan
 $totalPelanggan = $conn->query("SELECT COUNT(*) as total FROM pelanggan")
                        ->fetch_assoc()['total'];
 
-// total pendapatan
 $pendapatan = $conn->query("
     SELECT SUM(total_harga) as total 
     FROM detail_pesanan
@@ -36,7 +32,7 @@ if (!$pendapatan) {
     $pendapatan = 0;
 }
 
-/* ================= PESANAN TERBARU ================= */
+/*PESANAN TERBARU*/
 
 $pesanan = $conn->query("
     SELECT 
@@ -81,14 +77,16 @@ body{
     background:#f5f5f5;
 }
 
-/* SIDEBAR */
-.sidebar {
+.sidebar{
     width:240px;
     height:100vh;
-    background: #728663;
+    background:#728663;
     color:white;
     padding:20px;
     position:fixed;
+    display:flex;
+    flex-direction:column;
+    justify-content:space-between;
 }
 
 .logo {
@@ -122,14 +120,12 @@ body{
     margin-right:10px;
 }
 
-/* MAIN */
 .main{
     margin-left:240px;
     width:100%;
     padding:20px;
 }
 
-/* TOPBAR */
 .topbar {
     display:flex;
     justify-content:space-between;
@@ -137,7 +133,6 @@ body{
     margin-bottom:20px;
 }
 
-/* CARDS */
 .cards{
     display:grid;
     grid-template-columns:repeat(4,1fr);
@@ -167,7 +162,6 @@ body{
     color:gray;
 }
 
-/* TABLE */
 .table-box{
     background:white;
     padding:20px;
@@ -245,12 +239,29 @@ table td{
     margin-left:0;
 }
 
+.btn-logout{
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    gap:8px;
+
+    padding:12px;
+    border-radius:12px;
+
+    background:white;
+    color:#728663;
+
+    text-decoration:none;
+    font-weight:600;
+
+    margin-top:auto;
+}
+
 </style>
 </head>
 
 <body>
 
-<!-- SIDEBAR -->
 <div class="sidebar">
     <div class="logo">
         <img src="logo-brand.jpeg">
@@ -265,12 +276,12 @@ table td{
         <a href="dmenu.php"><i class="bi bi-list"></i>Menu</a>
         <a href="dpesanan.php"><i class="bi bi-receipt"></i>Pesanan</a>
     </div>
+
+    <a href="admin.php" class="btn-logout">Logout</a>
 </div>
 
-<!-- MAIN -->
 <div class="main">
 
-    <!-- TOPBAR -->
     <div class="topbar">
         <div style="display:flex; align-items:center; gap:15px;">
             <i class="bi bi-list" onclick="toggleSidebar()" style="cursor:pointer;"></i>
@@ -278,7 +289,6 @@ table td{
         </div>
     </div>
 
-    <!-- CARDS -->
     <div class="cards">
 
         <div class="card">
@@ -307,7 +317,6 @@ table td{
 
     </div>
 
-    <!-- TABLE PESANAN -->
     <div class="table-box">
 
         <div class="table-header">

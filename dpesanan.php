@@ -8,14 +8,18 @@ if (!isset($_SESSION['admin'])) {
     exit;
 }
 
-// total data
 $totalPesanan = mysqli_num_rows(mysqli_query($conn, "SELECT * FROM detail_pesanan"));
 $totalDiproses = mysqli_num_rows(mysqli_query($conn, "SELECT * FROM detail_pesanan WHERE status_pesanan='diproses'"));
 $totalSelesai = mysqli_num_rows(mysqli_query($conn, "SELECT * FROM detail_pesanan WHERE status_pesanan='selesai'"));
 $totalBatal = mysqli_num_rows(mysqli_query($conn, "SELECT * FROM detail_pesanan WHERE status_pesanan='dibatalkan'"));
 
-// ambil data pesanan
-$query = mysqli_query($conn, "SELECT * FROM detail_pesanan ORDER BY id_pesanan DESC");
+$query = mysqli_query($conn, "
+    SELECT detail_pesanan.*, pelanggan.nama, pelanggan.no_hp
+    FROM detail_pesanan
+    JOIN pelanggan 
+    ON detail_pesanan.id_pelanggan = pelanggan.id_pelanggan
+    ORDER BY detail_pesanan.id_pesanan DESC
+");
 
 ?>
 
@@ -42,14 +46,16 @@ body {
     background:#f5f5f5;
 }
 
-/* SIDEBAR */
-.sidebar {
+.sidebar{
     width:240px;
     height:100vh;
-    background: #728663;
+    background:#728663;
     color:white;
     padding:20px;
     position:fixed;
+    display:flex;
+    flex-direction:column;
+    justify-content:space-between;
 }
 
 .logo {
@@ -83,84 +89,87 @@ body {
     margin-right:10px;
 }
 
-
-/* CONTENT */
-
 .main{
-    margin-left:250px;
-    padding:30px;
+    margin-left:240px;
     width:100%;
+    padding:20px;
 }
 
-.title{
+.topbar {
     display:flex;
+    justify-content:space-between;
     align-items:center;
-    gap:15px;
-    margin-bottom:30px;
+    margin-bottom:20px;
 }
 
-.title i{
-    font-size:50px;
+.sidebar.hide {
+    transform: translateX(-100%);
 }
 
-.title h1{
-    font-size:55px;
+.main.full {
+    margin-left:0;
 }
 
-/* CARD */
-
-.stats{
+.cards{
     display:grid;
     grid-template-columns:repeat(4,1fr);
-    gap:20px;
-    margin-bottom:25px;
+    gap:15px;
+    margin-bottom:20px;
 }
 
 .card{
     background:white;
-    border-radius:18px;
     padding:20px;
+    border-radius:15px;
+    box-shadow:0 4px 12px rgba(0,0,0,0.08);
     display:flex;
     align-items:center;
     gap:18px;
-    border:1px solid #ddd;
 }
 
 .card i{
-    width:60px;
-    height:60px;
+    width:45px;
+    height:45px;
+    min-width:45px;
     border-radius:50%;
     display:flex;
     align-items:center;
     justify-content:center;
-    font-size:28px;
+    font-size:18px;
+}
+
+.card h2{
+    margin:5px 0;
+}
+
+.card h4{
+    font-size:14px;
+    margin-top:8px;
+    color:#666;
+}
+
+.growth{
+    font-size:12px;
+    color: gray;
 }
 
 .green{
     color:#18b76a;
     border:2px solid #18b76a;
+    background:rgba(24,183,106,0.08);
 }
 
 .yellow{
     color:#f4c21b;
     border:2px solid #f4c21b;
+    background:rgba(244,194,27,0.08);
 }
 
 .red{
     color:#ff5722;
     border:2px solid #ff5722;
+    background:rgba(255,87,34,0.08);
 }
-
-.card h2{
-    font-size:40px;
-}
-
-.card p{
-    font-size:14px;
-    color:#666;
-}
-
-/* TABLE */
 
 .table-box{
     background:white;
@@ -275,11 +284,28 @@ table td{
     color:white;
 }
 
+.btn-logout{
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    gap:8px;
+
+    padding:12px;
+    border-radius:12px;
+
+    background:white;
+    color:#728663;
+
+    text-decoration:none;
+    font-weight:600;
+
+    margin-top:auto;
+}
+
 </style>
 </head>
 <body>
 
-<!-- SIDEBAR -->
 <div class="sidebar">
     <div class="logo">
         <img src="logo-brand.jpeg">
@@ -294,62 +320,63 @@ table td{
         <a href="dmenu.php"><i class="bi bi-list"></i>Menu</a>
         <a href="dpesanan.php" class="active"><i class="bi bi-receipt"></i>Pesanan</a>
     </div>
+
+    <a href="admin.php" class="btn-logout">Logout</a>
+
 </div>
 
 <div class="main">
 
-    <div class="title">
-        <i class="fa fa-table-list"></i>
-        <h1>Pesanan</h1>
+    <div class="topbar">
+        <div style="display:flex; align-items:center; gap:15px;">
+            <i class="bi bi-list" onclick="toggleSidebar()" style="cursor:pointer;"></i>
+            <h2>Pesanan</h2>
+        </div>
     </div>
 
-    <!-- STATS -->
-
-    <div class="stats">
+    <div class="cards">
 
         <div class="card">
-            <i class="fa fa-bag-shopping green"></i>
+            <i class="bi bi-bag-check green"></i>
 
             <div>
-                <h3>Semua Pesanan</h3>
+                <h4>Pesanan</h4>
                 <h2><?= $totalPesanan ?></h2>
-                <p>Total semua pesanan</p>
+                <p class="growth">Total pesanan</p>
             </div>
         </div>
 
         <div class="card">
-            <i class="fa fa-clock yellow"></i>
+            <i class="bi bi-clock-history yellow"></i>
 
             <div>
-                <h3>Di Proses</h3>
+                <h4>Di Proses</h4>
                 <h2><?= $totalDiproses ?></h2>
-                <p>Sedang diproses</p>
+                <p class="growth">Sedang diproses</p>
             </div>
         </div>
 
         <div class="card">
-            <i class="fa fa-check green"></i>
+            <i class="bi bi-check-circle green"></i>
 
             <div>
-                <h3>Selesai</h3>
+                <h4>Selesai</h4>
                 <h2><?= $totalSelesai ?></h2>
-                <p>Pesanan selesai</p>
+                <p class="growth">Pesanan selesai</p>
             </div>
         </div>
 
         <div class="card">
-            <i class="fa fa-xmark red"></i>
+            <i class="bi bi-x-circle red"></i>
 
             <div>
-                <h3>Dibatalkan</h3>
+                <h4>Dibatalkan</h4>
                 <h2><?= $totalBatal ?></h2>
-                <p>Pesanan dibatalkan</p>
+                <p class="growth">Pesanan dibatalkan</p>
             </div>
         </div>
 
     </div>
-
-    <!-- TABLE -->
 
     <div class="table-box">
 
@@ -410,6 +437,12 @@ table td{
                         elseif($data['status_pesanan']=="diproses"){
                             echo "<span class='badge bg-yellow'>Diproses</span>";
                         }
+                        elseif($data['status_pesanan']=="pending"){
+                            echo "<span class='badge bg-yellow'>Pending</span>";
+                        }
+                        elseif($data['status_pesanan']=="dikonfirmasi"){
+                            echo "<span class='badge bg-yellow'>Dikonfirmasi</span>";
+                        }
                         else{
                             echo "<span class='badge bg-red'>Dibatalkan</span>";
                         }
@@ -419,7 +452,7 @@ table td{
 
                     <td>
                         <button class="view">
-                            <i class="fa fa-eye"></i>
+                            <i class="bi bi-eye"></i>
                         </button>
                     </td>
 
@@ -433,8 +466,8 @@ table td{
 
         <div class="pagination">
             <a href="#">&lt;</a>
-            <a href="#">1</a>
-            <a href="#" class="active">2</a>
+            <a href="#"class="active">1</a>
+            <a href="#">2</a>
             <a href="#">3</a>
             <a href="#">4</a>
             <a href="#">&gt;</a>
@@ -443,6 +476,13 @@ table td{
     </div>
 
 </div>
+
+<script>
+    function toggleSidebar(){
+    document.querySelector(".sidebar").classList.toggle("hide");
+    document.querySelector(".main").classList.toggle("full");
+}
+</script>
 
 </body>
 </html>

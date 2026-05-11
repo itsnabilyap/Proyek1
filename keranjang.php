@@ -16,16 +16,13 @@ if (isset($_POST['order'])) {
         echo "<script>alert('No HP hanya angka!');</script>";
         exit;
     }
-
-    // AMBIL CART
+    
     $cart = json_decode($_POST['cart_data'], true);
 
-    // SIMPAN DB
     $stmt = $conn->prepare("INSERT INTO pelanggan (nama, no_hp, alamat) VALUES (?, ?, ?)");
     $stmt->bind_param("sss", $nama, $hp, $alamat);
     $stmt->execute();
 
-    // BUAT PESAN WA
     $pesan = "Halo C2VIN Catering, saya ingin memesan:\n\n";
 $pesan .= "Nama: $nama\n";
 $pesan .= "No HP: $hp\n";
@@ -48,7 +45,6 @@ $pesan .= "Total Pesanan: Rp. ".number_format($total,0,',','.')."\n";
 
 $wa = "6287826913182";
 
-// WAJIB encode
 $link = "https://wa.me/".$wa."?text=".urlencode($pesan);
 
 echo "<script>

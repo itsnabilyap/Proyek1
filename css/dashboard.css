@@ -10,7 +10,6 @@ body {
     background-color: #e6e6d6;
 }
 
-/* ================== SIDEBAR ================== */
 .sidebar {
     width: 220px;
     height: 100vh;
@@ -63,12 +62,10 @@ body {
     background: #cfcfb5;
 }
 
-/* Spacer mendorong admin-info ke paling bawah */
 .sidebar-spacer {
     flex: 1;
 }
 
-/* Info Admin */
 .admin-info {
     display: flex;
     align-items: center;
@@ -76,7 +73,6 @@ body {
     padding: 12px;
     background-color: rgba(0, 0, 0, 0.15);
     border-radius: 12px;
-    /* TIDAK ada margin-top agar spacer yang bekerja */
 }
 
 .admin-avatar {
@@ -113,7 +109,6 @@ body {
     font-size: 11px;
 }
 
-/* Tombol Logout */
 .btn-logout {
     display: block;
     margin-top: 10px;
@@ -134,11 +129,10 @@ body {
     color: white;
 }
 
-/* ================== MAIN ================== */
 .main {
     flex: 1;
     padding: 30px;
-    margin-left: 220px; /* agar tidak tertutup sidebar fixed */
+    margin-left: 220px;
 }
 
 .header {
@@ -152,7 +146,6 @@ body {
     white-space: nowrap;
 }
 
-/* tombol tambah tetap di kanan */
 .btn-add {
     background: #6f8a67;
     color: white;
@@ -162,7 +155,6 @@ body {
     white-space: nowrap;
 }
 
-/* ================== TABLE ================== */
 .table-container {
     margin-top: 20px;
     overflow-x: auto;
@@ -193,7 +185,6 @@ th {
     border-radius: 10px;
 }
 
-/* ================== TOGGLE ================== */
 .switch {
     position: relative;
     display: inline-block;

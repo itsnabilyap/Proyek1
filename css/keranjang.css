@@ -16,19 +16,16 @@ body {
     background-color: #f9fce9;
 }
 
-/* CONTAINER */
 .cart-container {
     padding: 80px 40px 40px;
 }
 
-/* TITLE */
 .title {
     font-size: 25px;
     margin-bottom: 20px;
     padding-top: 15px;
 }
 
-/* GRID */
 .grid {
     display: flex;
     gap: 25px;
@@ -46,7 +43,6 @@ body {
     height: fit-content;
 }
 
-/* CARD */
 .card {
     background: white;
     border-radius: 12px;
@@ -54,7 +50,6 @@ body {
     box-shadow: 0 4px 10px rgba(0,0,0,0.08);
 }
 
-/* TABLE */
 .table-head, .table-row {
     display: grid;
     grid-template-columns: 2fr 1fr 1fr 1fr 50px;
@@ -73,7 +68,6 @@ body {
     border-bottom: 1px solid #eee;
 }
 
-/* PRODUCT */
 .product {
     display: flex;
     gap: 15px;
@@ -87,7 +81,6 @@ body {
     border-radius: 10px;
 }
 
-/* DELETE */
 .qty-box{
     display:flex;
     align-items:center;
@@ -156,7 +149,6 @@ body {
     color: red;
 }
 
-/* FORM */
 .form-group {
     margin-bottom: 15px;
 }
@@ -184,13 +176,11 @@ body {
     height: 100px;
 }
 
-/* SECTION TITLE */
 .section-title {
     font-weight: 600;
     margin-bottom: 10px;
 }
 
-/* TOTAL */
 .total-box {
     margin-top: 15px;
     padding-top: 10px;
@@ -199,7 +189,6 @@ body {
     justify-content: space-between;
 }
 
-/* BUTTON */
 .order-btn {
     margin-top: 20px;
     width: 100%;

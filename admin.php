@@ -13,7 +13,6 @@ if (isset($_POST['Masuk'])) {
     if ($result->num_rows > 0) {
         $_SESSION['admin'] = $username;
 
-        // pindah ke dashboard
         header("Location: ddashboard.php");
         exit;
     } else {
