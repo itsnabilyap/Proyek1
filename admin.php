@@ -11,8 +11,9 @@ if (isset($_POST['Masuk'])) {
     $result = $conn->query($query);
 
     if ($result->num_rows > 0) {
-        $_SESSION['admin'] = $username;
-
+        $_SESSION['admin'] = true;
+        $_SESSION['username'] = $username;
+        
         header("Location: ddashboard.php");
         exit;
     } else {

@@ -120,6 +120,20 @@ body{
     margin-right:10px;
 }
 
+.btn-logout{
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    gap:8px;
+    padding:12px;
+    border-radius:12px;
+    background:white;
+    color:#728663;
+    text-decoration:none;
+    font-weight:600;
+    margin-top:auto;
+}
+
 .main{
     margin-left:240px;
     width:100%;
@@ -261,24 +275,6 @@ table td{
     margin-left:0;
 }
 
-.btn-logout{
-    display:flex;
-    align-items:center;
-    justify-content:center;
-    gap:8px;
-
-    padding:12px;
-    border-radius:12px;
-
-    background:white;
-    color:#728663;
-
-    text-decoration:none;
-    font-weight:600;
-
-    margin-top:auto;
-}
-
 </style>
 </head>
 
@@ -297,9 +293,10 @@ table td{
         <a href="ddashboard.php" class="active"><i class="bi bi-house"></i>Dashboard</a>
         <a href="dmenu.php"><i class="bi bi-list"></i>Menu</a>
         <a href="dpesanan.php"><i class="bi bi-receipt"></i>Pesanan</a>
+        <a href="dpelanggan.php"><i class="bi bi-people"></i>Pelanggan</a>
     </div>
 
-    <a href="admin.php" class="btn-logout">Logout</a>
+    <a href="logout.php" class="btn-logout">Logout</a>
 </div>
 
 <div class="main">

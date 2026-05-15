@@ -333,9 +333,10 @@ table td{
         <a href="ddashboard.php"><i class="bi bi-house"></i>Dashboard</a>
         <a href="dmenu.php"><i class="bi bi-list"></i>Menu</a>
         <a href="dpesanan.php" class="active"><i class="bi bi-receipt"></i>Pesanan</a>
+        <a href="dpelanggan.php"><i class="bi bi-people"></i>Pelanggan</a>
     </div>
 
-    <a href="admin.php" class="btn-logout">Logout</a>
+    <a href="logout.php" class="btn-logout">Logout</a>
 
 </div>
 
