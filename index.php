@@ -23,26 +23,31 @@
     </section>
 
     <section class="about-selection" id="about">
-        <div class="container flex">
-            <div class="about-text">
-                <div class="info-box">
-                    <h3>C2VIN Catering – Mitra Sajian untuk Berbagai Acara</h3>
-                    <p>UMKM catering yang menghadirkan sajian lezat dengan pelayanan ramah dan terpercaya.</p>
-                </div>
-                <div class="info-box">
-                    <h3>Melayani berbagai jenis acara</h3>
-                    <p>Lomba tumpeng, hajatan & pernikahan, tahlilan, ulang tahun, hingga berbagai event lainnya.</p>
-                </div>
-                <div class="info-box">
-                    <h3>Dimasak dengan sepenuh hati, disajikan dengan kualitas</h3>
-                    <p>Setiap hidangan diolah dengan bahan pilihan, higienis, dan cita rasa yang memuaskan.</p>
-                </div>
+    <div class="container flex">
+
+        <div class="about-logo">
+            <img src="logo-brand.jpeg" alt="C2vin Logo">
+        </div>
+
+        <div class="about-text">
+            <div class="info-box">
+                <h3>C2VIN Catering – Mitra Sajian untuk Berbagai Acara</h3>
+                <p>UMKM catering yang menghadirkan sajian lezat dengan pelayanan ramah dan terpercaya.</p>
             </div>
-            <div class="about-logo">
-                <img src="logo-brand.jpeg" alt="C2vin Logo">
+
+            <div class="info-box">
+                <h3>Melayani berbagai jenis acara</h3>
+                <p>Lomba tumpeng, hajatan & pernikahan, tahlilan, ulang tahun, hingga berbagai event lainnya.</p>
+            </div>
+
+            <div class="info-box">
+                <h3>Dimasak dengan sepenuh hati, disajikan dengan kualitas</h3>
+                <p>Setiap hidangan diolah dengan bahan pilihan, higienis, dan cita rasa yang memuaskan.</p>
             </div>
         </div>
-    </section>
+
+    </div>
+</section>
 
     <section class="feature-section">
         <div class="flex-container">

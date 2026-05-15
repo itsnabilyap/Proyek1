@@ -467,9 +467,6 @@ table td{
         <div class="pagination">
             <a href="#">&lt;</a>
             <a href="#"class="active">1</a>
-            <a href="#">2</a>
-            <a href="#">3</a>
-            <a href="#">4</a>
             <a href="#">&gt;</a>
         </div>
 
