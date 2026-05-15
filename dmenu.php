@@ -640,35 +640,36 @@ th, td {
             </tr>
             <?php endwhile; ?>
         </table>
+
         <div class="pagination">
-    <small>
-        Menampilkan <?= $start+1 ?> - <?= min($start+$limit,$totalData) ?> dari <?= $totalData ?>
-    </small>
+            <small>
+                Menampilkan <?= $start+1 ?> - <?= min($start+$limit,$totalData) ?> dari <?= $totalData ?>
+            </small>
 
-    <div class="pages">
-        <?php if ($page > 1): ?>
-    <a href="?page=<?= $page-1 ?>&keyword=<?= $keyword ?>">
-        <button>&laquo;</button>
-    </a>
-<?php else: ?>
-    <button disabled style="opacity:0.5;cursor:not-allowed;">&laquo;</button>
-<?php endif; ?>
-
-        <?php for ($i=1;$i<=$totalPages;$i++): ?>
-            <a href="?page=<?= $i ?>&keyword=<?= $keyword ?>">
-                <button class="<?= $i==$page?'active':'' ?>"><?= $i ?></button>
+            <div class="pages">
+                <?php if ($page > 1): ?>
+            <a href="?page=<?= $page-1 ?>&keyword=<?= $keyword ?>">
+                <button>&laquo;</button>
             </a>
-        <?php endfor; ?>
-
-        <?php if ($page < $totalPages): ?>
-    <a href="?page=<?= $page+1 ?>&keyword=<?= $keyword ?>">
-        <button>&raquo;</button>
-    </a>
-<?php else: ?>
-    <button disabled style="opacity:0.5;cursor:not-allowed;">&raquo;</button>
-<?php endif; ?>
-    </div>
-</div>
+                <?php else: ?>
+                    <button disabled style="opacity:0.5;cursor:not-allowed;">&laquo;</button>
+                <?php endif; ?>
+        
+                <?php for ($i=1;$i<=$totalPages;$i++): ?>
+                    <a href="?page=<?= $i ?>&keyword=<?= $keyword ?>">
+                        <button class="<?= $i==$page?'active':'' ?>"><?= $i ?></button>
+                    </a>
+                <?php endfor; ?>
+                
+                <?php if ($page < $totalPages): ?>
+                    <a href="?page=<?= $page+1 ?>&keyword=<?= $keyword ?>">
+                        <button>&raquo;</button>
+                    </a>
+                <?php else: ?>
+                    <button disabled style="opacity:0.5;cursor:not-allowed;">&raquo;</button>
+                <?php endif; ?>
+            </div>
+        </div>
     </div>
 
 </div>

@@ -145,11 +145,28 @@ body{
     padding:20px;
     border-radius:15px;
     box-shadow:0 4px 12px rgba(0,0,0,0.08);
+    display:flex;
+    align-items:center;
+    gap:15px;
+}
+
+.card i{
+    width:45px;
+    height:45px;
+    min-width:45px;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    border-radius:50%;
+    font-size:18px;
+    background:#edf4e7;
+    color:#728663;
+    border:1px solid #728663;
 }
 
 .card h4{
     font-size:14px;
-    color:gray;
+    color:#666;
 }
 
 .card h2{
@@ -186,11 +203,16 @@ table{
     border-collapse:collapse;
 }
 
-table th,
-table td{
-    padding:12px;
+table th{
+    background:#f1f1f1;
+    padding:18px;
     text-align:center;
-    border-bottom:1px solid #eee;
+}
+
+table td{
+    padding:18px;
+    border-bottom:1px solid #ddd;
+    text-align:center;
 }
 
 .status{
@@ -292,27 +314,47 @@ table td{
     <div class="cards">
 
         <div class="card">
-            <h4>Total Pesanan</h4>
-            <h2><?= $totalPesanan ?></h2>
-            <p class="growth">Data seluruh pesanan</p>
+        
+            <i class="bi bi-bag"></i>
+        
+            <div class="card-content">
+                <h4>Total Pesanan</h4>
+                <h2><?= $totalPesanan ?></h2>
+                <p class="growth">Data seluruh pesanan</p>
+            </div>
+        
         </div>
 
         <div class="card">
-            <h4>Total Menu</h4>
-            <h2><?= $totalMenu ?></h2>
-            <p class="growth">Menu tersedia</p>
+            <i class="bi bi-cup-hot"></i>
+
+            <div class="card-content">
+                <h4>Total Menu</h4>
+                <h2><?= $totalMenu ?></h2>
+                <p class="growth">Menu tersedia</p>
+            </div>
+
         </div>
 
         <div class="card">
-            <h4>Total Pelanggan</h4>
-            <h2><?= $totalPelanggan ?></h2>
-            <p class="growth">Pelanggan terdaftar</p>
+            <i class="bi bi-people"></i>
+
+            <div class="card-content">
+                <h4>Total Pelanggan</h4>
+                <h2><?= $totalPelanggan ?></h2>
+                <p class="growth">Pelanggan terdaftar</p>
+            </div>
+
         </div>
 
         <div class="card">
-            <h4>Pendapatan</h4>
-            <h2>Rp <?= number_format($pendapatan, 0, ',', '.'); ?></h2>
-            <p class="growth">Pendapatan seluruh transaksi</p>
+            <i class="bi bi-wallet2"></i>
+
+            <div class="card-content">
+                <h4>Pendapatan</h4>
+                <h2>Rp <?= number_format($pendapatan, 0, ',', '.'); ?></h2>
+                <p class="growth">Seluruh transaksi</p>
+            </div>
         </div>
 
     </div>

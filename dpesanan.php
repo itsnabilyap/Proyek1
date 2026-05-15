@@ -8,17 +8,34 @@ if (!isset($_SESSION['admin'])) {
     exit;
 }
 
+$limit = 10;
+
+$page = isset($_GET['page']) ? (int)$_GET['page'] : 1;
+
+if($page < 1){
+    $page = 1;
+}
+
+$start = ($page - 1) * $limit;
+
+$totalData = mysqli_num_rows(
+    mysqli_query($conn,"SELECT * FROM detail_pesanan")
+);
+
+$totalPage = ceil($totalData / $limit);
+
 $totalPesanan = mysqli_num_rows(mysqli_query($conn, "SELECT * FROM detail_pesanan"));
 $totalDiproses = mysqli_num_rows(mysqli_query($conn, "SELECT * FROM detail_pesanan WHERE status_pesanan='diproses'"));
 $totalSelesai = mysqli_num_rows(mysqli_query($conn, "SELECT * FROM detail_pesanan WHERE status_pesanan='selesai'"));
 $totalBatal = mysqli_num_rows(mysqli_query($conn, "SELECT * FROM detail_pesanan WHERE status_pesanan='dibatalkan'"));
 
-$query = mysqli_query($conn, "
+$query = mysqli_query($conn,"
     SELECT detail_pesanan.*, pelanggan.nama, pelanggan.no_hp
     FROM detail_pesanan
-    JOIN pelanggan 
+    JOIN pelanggan
     ON detail_pesanan.id_pelanggan = pelanggan.id_pelanggan
     ORDER BY detail_pesanan.id_pesanan DESC
+    LIMIT $start,$limit
 ");
 
 ?>
@@ -124,7 +141,7 @@ body {
     box-shadow:0 4px 12px rgba(0,0,0,0.08);
     display:flex;
     align-items:center;
-    gap:18px;
+    gap:15px;
 }
 
 .card i{
@@ -138,36 +155,36 @@ body {
     font-size:18px;
 }
 
-.card h2{
-    margin:5px 0;
-}
-
 .card h4{
     font-size:14px;
-    margin-top:8px;
     color:#666;
+}
+
+.card h2{
+    margin-top:10px;
 }
 
 .growth{
     font-size:12px;
-    color: gray;
+    margin-top:8px;
+    color:gray;
 }
 
 .green{
     color:#18b76a;
-    border:2px solid #18b76a;
+    border:1px solid #18b76a;
     background:rgba(24,183,106,0.08);
 }
 
 .yellow{
     color:#f4c21b;
-    border:2px solid #f4c21b;
+    border:1px solid #f4c21b;
     background:rgba(244,194,27,0.08);
 }
 
 .red{
     color:#ff5722;
-    border:2px solid #ff5722;
+    border:1px solid #ff5722;
     background:rgba(255,87,34,0.08);
 }
 
@@ -232,10 +249,6 @@ table td{
     text-align:center;
 }
 
-.nama{
-    text-align:left;
-}
-
 .nama small{
     color:#999;
 }
@@ -260,27 +273,28 @@ table td{
     cursor:pointer;
 }
 
-.pagination{
+.pagination {
     display:flex;
-    justify-content:flex-end;
-    gap:10px;
-    margin-top:20px;
-}
-
-.pagination a{
-    width:35px;
-    height:35px;
-    display:flex;
+    justify-content:space-between;
+    margin-top:15px;
     align-items:center;
-    justify-content:center;
-    border-radius:8px;
-    background:#eee;
-    color:black;
-    text-decoration:none;
 }
 
-.pagination a.active{
-    background:#748663;
+.pagination a {
+    text-decoration: none;
+    color: inherit;
+}
+
+.pages button {
+    padding:6px 10px;
+    margin:2px;
+    border:none;
+    border-radius:8px;
+    cursor:pointer;
+}
+
+.pages .active {
+    background:#6B7D5C;
     color:white;
 }
 
@@ -464,11 +478,45 @@ table td{
 
         </table>
 
-        <div class="pagination">
-            <a href="#">&lt;</a>
-            <a href="#"class="active">1</a>
-            <a href="#">&gt;</a>
-        </div>
+<div class="pagination">
+            <small>
+                Menampilkan <?= $start+1 ?> - <?= min($start+$limit,$totalData) ?> dari <?= $totalData ?>
+            </small>
+
+    <div class="pages">
+
+        <?php if($page>1): ?>
+            <a href="?page=<?= $page-1 ?>">
+                <button>&laquo;</button>
+            </a>
+        <?php else: ?>
+            <button disabled>&laquo;</button>
+        <?php endif; ?>
+
+
+        <?php for($i=1;$i<=$totalPage;$i++): ?>
+
+            <a href="?page=<?= $i ?>">
+                <button class="<?= $i==$page ? 'active':'' ?>">
+                    <?= $i ?>
+                </button>
+            </a>
+
+        <?php endfor; ?>
+
+
+
+        <?php if($page<$totalPage): ?>
+            <a href="?page=<?= $page+1 ?>">
+                <button>&raquo;</button>
+            </a>
+        <?php else: ?>
+            <button disabled>&raquo;</button>
+        <?php endif; ?>
+
+    </div>
+
+</div>
 
     </div>
 
