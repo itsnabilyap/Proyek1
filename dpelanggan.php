@@ -8,42 +8,45 @@ if (!isset($_SESSION['admin'])) {
     exit;
 }
 
-/* =========================
-   TOTAL DATA
-========================= */
-
-// total pelanggan
 $totalPelanggan = $conn->query("
-    SELECT COUNT(*) as total 
-    FROM pelanggan
-")->fetch_assoc()['total'];
-
-// pelanggan baru (30 hari terakhir)
-$pelangganBaru = $conn->query("
-    SELECT COUNT(*) as total
-    FROM pelanggan
-")->fetch_assoc()['total'];
-
-// total order
-$totalOrder = $conn->query("
-    SELECT COUNT(*) as total
+    SELECT COUNT(DISTINCT id_pelanggan) as total
     FROM detail_pesanan
 ")->fetch_assoc()['total'];
 
-// total pendapatan
-$totalBelanja = $conn->query("
+
+$pelangganBaru = $conn->query("
+    SELECT COUNT(DISTINCT id_pelanggan) as total
+    FROM detail_pesanan
+    WHERE tanggal_pemesanan >= DATE_SUB(NOW(), INTERVAL 30 DAY)
+")->fetch_assoc()['total'];
+
+$totalOrder = $conn->query("
+    SELECT SUM(jumlah_pesanan) as total
+    FROM detail_pesanan
+")->fetch_assoc()['total'];
+
+if(!$totalOrder){
+    $totalOrder = 0;
+}
+
+$totalPendapatan = $conn->query("
     SELECT SUM(total_harga) as total
     FROM detail_pesanan
     WHERE status_pesanan='selesai'
 ")->fetch_assoc()['total'];
 
-if(!$totalBelanja){
-    $totalBelanja = 0;
+if(!$totalPendapatan){
+    $totalPendapatan = 0;
 }
 
-/* =========================
-   DATA PELANGGAN
-========================= */
+$keyword = "";
+
+if(isset($_GET['keyword'])){
+    $keyword = mysqli_real_escape_string(
+        $conn,
+        $_GET['keyword']
+    );
+}
 
 $query = $conn->query("
     SELECT 
@@ -52,7 +55,7 @@ $query = $conn->query("
         p.no_hp,
         p.alamat,
 
-        COUNT(d.id_pesanan) as total_order,
+        COALESCE(SUM(d.jumlah_pesanan),0) as total_order,
 
         COALESCE(SUM(d.total_harga),0) as total_belanja,
 
@@ -62,6 +65,8 @@ $query = $conn->query("
 
     LEFT JOIN detail_pesanan d
     ON p.id_pelanggan = d.id_pelanggan
+
+    WHERE p.nama LIKE '%$keyword%'
 
     GROUP BY p.id_pelanggan
 
@@ -75,7 +80,7 @@ $query = $conn->query("
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>ADMIN C2VIN</title>
+<title>Pelanggan - Admin</title>
 
 <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600&display=swap" rel="stylesheet">
 <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons/font/bootstrap-icons.css" rel="stylesheet">
@@ -192,7 +197,6 @@ body{
     outline:none;
 }
 
-/* ================= CARDS ================= */
 
 .cards{
     display:grid;
@@ -235,7 +239,6 @@ body{
     margin:5px 0;
 }
 
-/* ================= TABLE ================= */
 
 .table-box{
     background:white;
@@ -279,7 +282,6 @@ body{
     cursor:pointer;
 }
 
-/* ================= TABLE ================= */
 
 table{
     width:100%;
@@ -328,8 +330,6 @@ table td{
     background:white;
     cursor:pointer;
 }
-
-/* ================= PAGINATION ================= */
 
 .pagination{
     margin-top:20px;
@@ -408,9 +408,7 @@ table td{
         </div>
     </div>
 
-    <!-- HEADER -->
-
-    <div class="header-menu">    <!-- page header -->
+    <div class="header-menu">
 
         <div>
             <h2>Daftar Pelanggan</h2>
@@ -419,14 +417,15 @@ table td{
 
         <div style="display:flex; gap:10px;">
             <form method="GET" class="search">
-                <input type="text" name="keyword" placeholder="Cari menu..."
-                    value="">
+                <input 
+                    type="text" 
+                    name="keyword" 
+                    placeholder="Cari pelanggan..."
+                    value="<?= $keyword ?>">
             </form>
         </div>
 
     </div>
-
-    <!-- CARDS -->
 
     <div class="cards">
 
@@ -463,14 +462,12 @@ table td{
             <div>
                 <p>Total Belanja</p>
                 <h2>
-                    Rp <?= number_format($totalBelanja,0,',','.') ?>
+                    Rp <?= number_format($totalPendapatan,0,',','.') ?>
                 </h2>
             </div>
         </div>
 
     </div>
-
-    <!-- TABLE -->
 
     <div class="table-box">
 
@@ -539,8 +536,6 @@ table td{
             </tbody>
 
         </table>
-
-        <!-- PAGINATION -->
 
         <div class="pagination">
 

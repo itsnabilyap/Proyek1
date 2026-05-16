@@ -29,14 +29,42 @@ $totalDiproses = mysqli_num_rows(mysqli_query($conn, "SELECT * FROM detail_pesan
 $totalSelesai = mysqli_num_rows(mysqli_query($conn, "SELECT * FROM detail_pesanan WHERE status_pesanan='selesai'"));
 $totalBatal = mysqli_num_rows(mysqli_query($conn, "SELECT * FROM detail_pesanan WHERE status_pesanan='dibatalkan'"));
 
-$query = mysqli_query($conn,"
+$status = isset($_GET['status']) ? $_GET['status'] : 'semua';
+
+$sort = isset($_GET['sort']) ? $_GET['sort'] : 'desc';
+
+$keyword = isset($_GET['keyword']) ? $_GET['keyword'] : '';
+$date = isset($_GET['date']) ? $_GET['date'] : '';
+
+$where = " WHERE 1=1 ";
+
+if ($status != 'semua') {
+    $where .= " AND detail_pesanan.status_pesanan = '$status' ";
+}
+
+if (!empty($date)) {
+    $where .= " AND DATE(detail_pesanan.tanggal_pemesanan) = '$date' ";
+}
+
+if (!empty($keyword)) {
+    $where .= " AND (
+        pelanggan.nama LIKE '%$keyword%' OR
+        detail_pesanan.id_pesanan LIKE '%$keyword%'
+    )";
+}
+
+$sql = "
     SELECT detail_pesanan.*, pelanggan.nama, pelanggan.no_hp
     FROM detail_pesanan
     JOIN pelanggan
     ON detail_pesanan.id_pelanggan = pelanggan.id_pelanggan
-    ORDER BY detail_pesanan.id_pesanan DESC
-    LIMIT $start,$limit
-");
+";
+
+$sql .= $where;
+
+$sql .= " ORDER BY detail_pesanan.tanggal_pemesanan $sort LIMIT $start,$limit";
+
+$query = mysqli_query($conn, $sql);
 
 ?>
 
@@ -162,6 +190,7 @@ body {
 
 .card h2{
     margin-top:10px;
+    font-size: 22px;
 }
 
 .growth{
@@ -316,6 +345,16 @@ table td{
     margin-top:auto;
 }
 
+.filter button{
+    transition: 0.2s ease;
+    outline: none;
+    border: none;
+}
+
+.filter button:focus{
+    outline: none;
+}
+
 </style>
 </head>
 <body>
@@ -397,16 +436,25 @@ table td{
 
         <div class="top-table">
 
-            <div class="filter">
-                <button class="semua">Semua</button>
-                <button class="proses">Diproses</button>
-                <button class="selesai">Selesai</button>
-                <button class="batal">Dibatalkan</button>
-            </div>
+<div class="filter">
+    <a href="?status=semua"><button class="semua">Semua</button></a>
+    <a href="?status=diproses"><button class="proses">Diproses</button></a>
+    <a href="?status=selesai"><button class="selesai">Selesai</button></a>
+    <a href="?status=dibatalkan"><button class="batal">Dibatalkan</button></a>
+</div>
 
             <div class="search">
-                <input type="date">
-                <input type="text" placeholder="Cari Pesanan">
+<form method="GET" class="search">
+
+    <input type="hidden" name="status" value="<?= $status ?>">
+    <input type="hidden" name="sort" value="<?= $sort ?>">
+
+    <input type="date" name="date" value="<?= $date ?>">
+
+    <input type="text" name="keyword" placeholder="Cari Pesanan" value="<?= $keyword ?>">
+
+    <button type="submit" style="display:none;"></button>
+</form>
             </div>
 
         </div>
@@ -453,7 +501,7 @@ table td{
                             echo "<span class='badge bg-yellow'>Diproses</span>";
                         }
                         elseif($data['status_pesanan']=="pending"){
-                            echo "<span class='badge bg-yellow'>Pending</span>";
+                            echo "<span class='badge bg-red'>Pending</span>";
                         }
                         elseif($data['status_pesanan']=="dikonfirmasi"){
                             echo "<span class='badge bg-yellow'>Dikonfirmasi</span>";
@@ -487,9 +535,9 @@ table td{
     <div class="pages">
 
         <?php if($page>1): ?>
-            <a href="?page=<?= $page-1 ?>">
-                <button>&laquo;</button>
-            </a>
+<a href="?page=<?= $page-1 ?>&status=<?= $status ?>&sort=<?= $sort ?>&keyword=<?= $keyword ?>&date=<?= $date ?>">
+    <button>&laquo;</button>
+</a>
         <?php else: ?>
             <button disabled>&laquo;</button>
         <?php endif; ?>
@@ -497,20 +545,20 @@ table td{
 
         <?php for($i=1;$i<=$totalPage;$i++): ?>
 
-            <a href="?page=<?= $i ?>">
-                <button class="<?= $i==$page ? 'active':'' ?>">
-                    <?= $i ?>
-                </button>
-            </a>
+<a href="?page=<?= $i ?>&status=<?= $status ?>&sort=<?= $sort ?>&keyword=<?= $keyword ?>&date=<?= $date ?>">
+    <button class="<?= $i==$page ? 'active':'' ?>">
+        <?= $i ?>
+    </button>
+</a>
 
         <?php endfor; ?>
 
 
 
         <?php if($page<$totalPage): ?>
-            <a href="?page=<?= $page+1 ?>">
-                <button>&raquo;</button>
-            </a>
+<a href="?page=<?= $page+1 ?>&status=<?= $status ?>&sort=<?= $sort ?>&keyword=<?= $keyword ?>&date=<?= $date ?>">
+    <button>&raquo;</button>
+</a>
         <?php else: ?>
             <button disabled>&raquo;</button>
         <?php endif; ?>

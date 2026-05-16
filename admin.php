@@ -13,7 +13,7 @@ if (isset($_POST['Masuk'])) {
     if ($result->num_rows > 0) {
         $_SESSION['admin'] = true;
         $_SESSION['username'] = $username;
-        
+
         header("Location: ddashboard.php");
         exit;
     } else {
@@ -33,7 +33,7 @@ if (isset($_POST['Masuk'])) {
 
   <div class="container">
     <div class="login-box">
-      <h2>Selamat Datang Admin!</h2>
+      <h2>Selamat Datang, Admin!</h2>
       <hr>
 
       <form method="POST">
@@ -43,7 +43,7 @@ if (isset($_POST['Masuk'])) {
         <label>Password</label>
         <input type="password" name="password" required>
 
-        <button type="submit" name="Masuk">Masuk</button>
+        <button type="submit" name="Masuk">Login</button>
       </form>
     </div>
   </div>
