@@ -500,6 +500,7 @@ th, td {
     margin-top:20px;
     display:flex;
     gap:10px;
+    justify-content: flex-end;
 }
 
 .btn-cancel{
@@ -535,6 +536,14 @@ th, td {
     font-weight:600;
 
     margin-top:auto;
+}
+
+.read-more-btn, .read-less-btn {
+    color: #dcdcdc;
+    font-weight: 600;
+    text-decoration: none;
+    cursor: pointer;
+    font-size: 12px;
 }
 
 </style>
@@ -608,7 +617,7 @@ th, td {
                     </div>
                 </td>
 
-                <td><?= $row['deskripsi']; ?></td>
+                <td class="deskripsi-cell" data-text="<?= htmlspecialchars($row['deskripsi']); ?>"></td>
 
                 <td>Rp <?= number_format($row['harga']); ?></td>
 
@@ -869,6 +878,42 @@ function closeTambahModal(){
     document.getElementById("tambahModal").style.display = "none";
 
 }
+
+document.querySelectorAll('.deskripsi-cell').forEach(function(cell) {
+    const text = cell.getAttribute('data-text');
+
+    if (!text) return;
+
+    if (text.length <= 50) {
+        cell.textContent = text;
+        return;
+    }
+
+    const short = text.substring(0, 50) + '...';
+
+    cell.innerHTML = `
+        <span class="short-text">${short}</span>
+        <span class="full-text" style="display:none">${text}</span>
+        <a href="#" class="read-more-btn"> read more</a>
+        <a href="#" class="read-less-btn" style="display:none"> show less</a>
+    `;
+
+    cell.querySelector('.read-more-btn').addEventListener('click', function(e) {
+        e.preventDefault();
+        cell.querySelector('.short-text').style.display = 'none';
+        cell.querySelector('.full-text').style.display = 'inline';
+        this.style.display = 'none';
+        cell.querySelector('.read-less-btn').style.display = 'inline';
+    });
+
+    cell.querySelector('.read-less-btn').addEventListener('click', function(e) {
+        e.preventDefault();
+        cell.querySelector('.short-text').style.display = 'inline';
+        cell.querySelector('.full-text').style.display = 'none';
+        this.style.display = 'none';
+        cell.querySelector('.read-more-btn').style.display = 'inline';
+    });
+});
 
 </script>
 
