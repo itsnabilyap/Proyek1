@@ -19,7 +19,7 @@ if (isset($_POST['Masuk'])) {
     } else {
         echo "<script>alert('Username atau password salah!');</script>";
     }
-}
+  }
 ?>
 
 <!DOCTYPE html>
@@ -45,6 +45,7 @@ if (isset($_POST['Masuk'])) {
 
         <button type="submit" name="Masuk">Login</button>
       </form>
+      
     </div>
   </div>
 

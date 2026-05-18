@@ -21,10 +21,10 @@ $data = $query->fetch_assoc();
 <?php include 'partials/navbar.php'; ?>
 
 <main class="container content">
-
     <h1>Detail Menu</h1>
 
     <div class="product-detail">
+
         <div class="product-image">
             <img src="img/<?php echo $data['foto_produk']; ?>">
         </div>
@@ -36,9 +36,10 @@ $data = $query->fetch_assoc();
             <div class="form-group">
                 <label>/Paket</label>
                 <select id="pilihan-jumlah">
+
                     <?php
-                $menuPaket = [1, 2, 3];
-                ?>
+                        $menuPaket = [1, 2, 3];
+                    ?>
                     <?php if (in_array($data['id_menu'], $menuPaket)) { ?>
                     <option value="" disabled selected>Pilih Jumlah</option>
                     <option value="1">1</option>
@@ -46,12 +47,14 @@ $data = $query->fetch_assoc();
                     <option value="3">3</option>
                     <option value="4">4</option>
                     <option value="5">5</option>
+
                     <?php } else { ?>
                         <option value=""disabled selected>Pilih Jumlah</option>
                         <option value="20">20</option>
                         <option value="40">40</option>
                         <option value="50">50</option>
                     <?php } ?>
+
                 </select>
             </div>
 
@@ -59,10 +62,10 @@ $data = $query->fetch_assoc();
                 '<?php echo $data['nama_paket']; ?>',
                 <?php echo $data['harga']; ?>,
                 'img/<?php echo $data['foto_produk']; ?>'
-            )">
-                Tambah ke Keranjang
+                )">Tambah ke Keranjang
             </button>
         </div>
+
     </div>
 
     <div class="description">
@@ -74,7 +77,8 @@ $data = $query->fetch_assoc();
 
 <?php include 'partials/footer.php'; ?>
 
-    <script src="https://unpkg.com/feather-icons"></script>
+<script src="https://unpkg.com/feather-icons"></script>
+
     <script>
         feather.replace();
     </script>

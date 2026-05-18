@@ -9,23 +9,22 @@ if (!isset($_SESSION['admin'])) {
 }
 
 /*TOTAL DATA*/
-
 $totalPesanan = $conn->query("SELECT COUNT(*) as total FROM detail_pesanan")
-                      ->fetch_assoc()['total'];
+                     ->fetch_assoc()['total'];
 
 $totalMenu = $conn->query("
-    SELECT COUNT(*) as total 
-    FROM menu
-    WHERE status='tersedia'
+                        SELECT COUNT(*) as total 
+                        FROM menu
+                        WHERE status='tersedia'
 ")->fetch_assoc()['total'];
 
 $totalPelanggan = $conn->query("SELECT COUNT(*) as total FROM pelanggan")
                        ->fetch_assoc()['total'];
 
 $pendapatan = $conn->query("
-    SELECT SUM(total_harga) as total 
-    FROM detail_pesanan
-    WHERE status_pesanan='selesai'
+                        SELECT SUM(total_harga) as total 
+                        FROM detail_pesanan
+                        WHERE status_pesanan='selesai'
 ")->fetch_assoc()['total'];
 
 if (!$pendapatan) {
@@ -35,22 +34,21 @@ if (!$pendapatan) {
 /*PESANAN TERBARU*/
 
 $pesanan = $conn->query("
-    SELECT 
-        d.id_pesanan,
-        d.total_harga,
-        d.status_pesanan,
-        d.tanggal_pemesanan,
-        p.nama AS nama_pelanggan,
-        m.nama_paket
-    FROM detail_pesanan d
-    JOIN pelanggan p 
-        ON d.id_pelanggan = p.id_pelanggan
-    JOIN menu m 
-        ON d.id_menu = m.id_menu
-    ORDER BY d.id_pesanan DESC
-    LIMIT 5
-");
-
+                    SELECT 
+                        d.id_pesanan,
+                        d.total_harga,
+                        d.status_pesanan,
+                        d.tanggal_pemesanan,
+                        p.nama AS nama_pelanggan,
+                        m.nama_paket
+                    FROM detail_pesanan d
+                    JOIN pelanggan p 
+                        ON d.id_pelanggan = p.id_pelanggan
+                    JOIN menu m 
+                        ON d.id_menu = m.id_menu
+                    ORDER BY d.id_pesanan DESC
+                    LIMIT 5
+                ");
 ?>
 
 <!DOCTYPE html>
@@ -298,10 +296,10 @@ table td{
     </div>
 
     <a href="logout.php" class="btn-logout">Logout</a>
+
 </div>
 
 <div class="main">
-
     <div class="topbar">
         <div style="display:flex; align-items:center; gap:15px;">
             <i class="bi bi-list" onclick="toggleSidebar()" style="cursor:pointer;"></i>
@@ -312,7 +310,6 @@ table td{
     <div class="cards">
 
         <div class="card">
-        
             <i class="bi bi-bag"></i>
         
             <div class="card-content">
@@ -362,9 +359,8 @@ table td{
         <div class="table-header">
             <h3>Pesanan Terbaru</h3>
 
-            <a href="#" class="lihat-semua">
-                Lihat Semua
-            </a>
+            <a href="#" class="lihat-semua">Lihat Semua</a>
+
         </div>
 
         <table>

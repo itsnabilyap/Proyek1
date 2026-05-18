@@ -1,14 +1,11 @@
 <?php
 session_start();
 
+include 'database.php';
+
 if (!isset($_SESSION['admin'])) {
     header("Location: admin.php");
     exit;
-}
-
-$conn = new mysqli("localhost", "root", "", "catering_db");
-if ($conn->connect_error) {
-    die("Koneksi gagal: " . $conn->connect_error);
 }
 
 /*TOGGLE STATUS*/
@@ -233,6 +230,7 @@ if (isset($_POST['edit_menu'])) {
 <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons/font/bootstrap-icons.css" rel="stylesheet">
 
 <style>
+
 * {
     margin:0;
     padding:0;
@@ -552,6 +550,7 @@ th, td {
 <body>
 
 <div class="sidebar">
+
     <div class="logo">
         <img src="logo-brand.jpeg">
         <div>
@@ -581,6 +580,7 @@ th, td {
     </div>
 
     <div class="header-menu">
+
         <div>
             <h2>Daftar Menu</h2>
             <small>Kelola semua menu paket catering Anda</small>
@@ -588,17 +588,16 @@ th, td {
 
         <div style="display:flex; gap:10px;">
             <form method="GET" class="search">
-                <input type="text" name="keyword" placeholder="Cari menu..."
-                    value="<?= $keyword ?>">
+                <input type="text" name="keyword" placeholder="Cari menu..." value="<?= $keyword ?>">
             </form>
 
-            <button onclick="openTambahModal()">
-                + Tambah Menu
-            </button>
+            <button onclick="openTambahModal()">+ Tambah Menu</button>
         </div>
+
     </div>
 
     <div class="table-box">
+
         <table>
             <tr>
                 <th>Nama Paket</th>
@@ -609,6 +608,7 @@ th, td {
             </tr>
 
             <?php while ($row = $result->fetch_assoc()): ?>
+
             <tr>
                 <td>
                     <div class="menu-item">
@@ -622,15 +622,14 @@ th, td {
                 <td>Rp <?= number_format($row['harga']); ?></td>
 
                 <td>
-    <button 
-    class="status-btn <?= $row['status']=='Tersedia' ? 'tersedia' : 'habis' ?>"
-    onclick="ubahStatus(<?= $row['id_menu']; ?>, this)">
-    <?= $row['status']; ?>
-</button>
-</td>
+                    <button class="status-btn <?= $row['status']=='Tersedia' ? 'tersedia' : 'habis' ?>" onclick="ubahStatus(<?= $row['id_menu']; ?>, this)">
+                            <?= $row['status']; ?>
+                    </button>
+                </td>
 
                 <td>
                     <div class="aksi">
+
                         <button class="action-btn edit"
                             onclick='openEditModal(
                             <?= $row["id_menu"] ?>,
@@ -639,28 +638,33 @@ th, td {
                             <?= $row["harga"] ?>,
                             <?= json_encode($row["foto_produk"]) ?>
                             )'>
-                                <i class="bi bi-pencil"></i>
+                            <i class="bi bi-pencil"></i>
                         </button>
 
                         <button class="action-btn delete" onclick="hapusMenu(<?= $row['id_menu']; ?>, this)">
-    <i class="bi bi-trash"></i>
-</button>
+                            <i class="bi bi-trash"></i>
+                        </button>
+
                     </div>
+
                 </td>
             </tr>
+
             <?php endwhile; ?>
         </table>
 
         <div class="pagination">
+
             <small>
                 Menampilkan <?= $start+1 ?> - <?= min($start+$limit,$totalData) ?> dari <?= $totalData ?>
             </small>
 
             <div class="pages">
+
                 <?php if ($page > 1): ?>
-            <a href="?page=<?= $page-1 ?>&keyword=<?= $keyword ?>">
-                <button>&laquo;</button>
-            </a>
+                <a href="?page=<?= $page-1 ?>&keyword=<?= $keyword ?>">
+                    <button>&laquo;</button>
+                </a>
                 <?php else: ?>
                     <button disabled style="opacity:0.5;cursor:not-allowed;">&laquo;</button>
                 <?php endif; ?>
@@ -678,14 +682,16 @@ th, td {
                 <?php else: ?>
                     <button disabled style="opacity:0.5;cursor:not-allowed;">&raquo;</button>
                 <?php endif; ?>
+
             </div>
+
         </div>
+
     </div>
 
 </div>
 
 <div class="modal" id="tambahModal">
-
     <div class="modal-content">
 
         <h2>Tambah Menu</h2>
@@ -729,22 +735,20 @@ th, td {
         </form>
 
     </div>
-
 </div>
 
 <div class="modal" id="editModal">
-
     <div class="modal-content">
 
         <h2>Edit Menu</h2>
 
-<form method="POST" enctype="multipart/form-data">
+        <form method="POST" enctype="multipart/form-data">
 
-    <input type="hidden" name="edit_menu" value="1">
-    <input type="hidden" name="id_menu" id="edit_id">
+            <input type="hidden" name="edit_menu" value="1">
+            <input type="hidden" name="id_menu" id="edit_id">
 
-    <label>Nama Paket</label>
-    <input type="text" name="nama_paket" id="edit_nama">
+            <label>Nama Paket</label>
+            <input type="text" name="nama_paket" id="edit_nama">
 
             <label>Gambar Produk</label>
 
@@ -773,10 +777,10 @@ th, td {
         </form>
 
     </div>
-
 </div>
 
 <script>
+    
 function toggleSidebar(){
     document.querySelector(".sidebar").classList.toggle("hide");
     document.querySelector(".main").classList.toggle("full");
