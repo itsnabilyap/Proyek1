@@ -181,8 +181,7 @@ if (isset($_POST['order'])) {
                 name="cart_data"
                 id="cart_data">
 
-            <div class="section-title">
-                <i class="fa fa-user"></i>
+            <div class="section-top">
                 Data Pemesan
             </div>
 
@@ -241,8 +240,6 @@ if (isset($_POST['order'])) {
             </div>
 
             <div class="section-title">
-
-                <i class="fa fa-file"></i>
                 Total Pesanan
 
             </div>

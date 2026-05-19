@@ -369,10 +369,10 @@ table td{
     </div>
 
     <div class="menu">
-        <a href="ddashboard.php"><i class="bi bi-house"></i>Dashboard</a>
-        <a href="dmenu.php"><i class="bi bi-list"></i>Menu</a>
-        <a href="dpesanan.php" class="active"><i class="bi bi-receipt"></i>Pesanan</a>
-        <a href="dpelanggan.php"><i class="bi bi-people"></i>Pelanggan</a>
+        <a href="ddashboard.php">Dashboard</a>
+        <a href="dmenu.php">Menu</a>
+        <a href="dpesanan.php" class="active">Pesanan</a>
+        <a href="dpelanggan.php">Pelanggan</a>
     </div>
 
     <a href="logout.php" class="btn-logout">Logout</a>
